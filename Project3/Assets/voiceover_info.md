@@ -1,0 +1,14 @@
+# معلومات الصوت — علم نفس الطموح الكسول
+
+- voiceoverId: `651b5067-5eb2-4171-8f50-f46ee4f0ee41`
+- المدة: 79.07 ثانية
+- عدد الأحرف: 852
+- الصوت: Brian (nPczCjzI2devNBz1zQrb)
+- تكلفة الكريدت: 14 كريدت
+
+## رابط التحميل (يصلح ساعة واحدة)
+```
+https://ai-voiceovers.s3.us-east-1.amazonaws.com/08c604b4-52e0-4cc6-891f-b1dbe9f4c0d4/651b5067-5eb2-4171-8f50-f46ee4f0ee41.mp3?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAQLTYEZQZ5TZPTSBC%2F20260626%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260626T092238Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEJr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJGMEQCIErKGD34ufNPOeReATUfcdJaMFTL4rf7QuFNBSRxJkGpAiAq8ECkkCWxMVLIKQYWbfzsX2p%2BaEN%2BMGvcASGnnVjA%2BCr%2FBAhjEAAaDDAyNDk0ODAzNDYxMSIMSvbexBc7Pg4%2F5LsZKtwE9Yvss%2BMtM6hN2SWVD%2BzQzwpap%2FhvFCpECzyhwSQ458WADaipREO0XubpagzoEbiYtSZg6ORk5o%2BmuvEYZAQGFNKlqHmovNTn%2BDysMAU6VHSp366g%2FopCckLjcFED07WJBXSGac2FsiHOaXdu22Sh%2Bxk6ccdQ9K9Pj65U35VyVXwWKSIxHmTThqAavi772IIIFrj1trqH9KwBbaElthqBLH9iuqpAlnmemdUO9UB3QNAxmYr7UweKZQPBByEN%2FTkYYsgdqMlvvkCP%2BYbib5NiFqskAynjXBiYMucRMB%2FhVf44jD7%2BPSxSXiQbnVTI1w1C35FwFjHyHCjpvbDLfGeX1brGFk5TqzjWd1ojyjCawwtWQXuG4OBJGBkcuEbbrSqYgpaSKUc4rGcYTldkjPeNOmjK9RLbpGKOSioYFgzwJz72QIGi4O1kDjAexMT2DRY8aOz92XkwJneuO4du0zBD6CqSTh9XiCPjf37hrbwCOhJsFvvtsGVUdHj%2FTLsgxWflhRvOiRMkmaUAmEVJ4n7ZJd1HQDYsbJ5tt%2FKAPUUWXOGr%2FZJI4BcLjKn0Mt6bAZa0hj%2FdZ0Jz4T9wcEHjzIgZTDlZJymtiapERzUXU9yI0yXuNxWYNKY7KHUYL1x5gZebANqUpghiMeMzQR3%2Bgtbs05UUjsYn8gMfDmhhX%2BR6x9I7AKCbWJft1Hs5%2BjUyol5GccGk0eMqR1bL1bwrEomSASnRy%2Fj5AEhkftX4a3sdKDlJgfSDgJTDWxqIHaACKNHeI6l26e6AIX%2BRszYyZikaBc5eBiC0NeDCtXXylzDeifnRBjqZAWLv2F81fPiLzdDZv%2Bg2A5SQCPU2Jd1HxRnAPNYNk2Wu7ckT%2Bd1CbmYH6bfIKwmAASKFzqy5T7DNCjelvwAJd1xqeR5SBXyyKa1eDmZXDo8THnwQ68iLL9ZHnYSgggX32c40QTWMOBghF5APUVLtFU62uHRYsgO%2B003EaRbMrnf0uDu15ST31kypPLUs3fyGVaFmNyZyDbQbNg%3D%3D&X-Amz-Signature=2e2a8021cff4321048b0920138654caa939a1b677d465f2f95b1fbd2ece35e9c&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject
+```
+
+⚠️ ينتهي الرابط في: 3600 ثانية من وقت التوليد
