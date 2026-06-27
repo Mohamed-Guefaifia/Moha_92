@@ -427,12 +427,46 @@ const SCENES = [
 </div>`}
 ];
 
-// ─── Engine ──────────────────────────────────────────────────────────────────
-let cur = 0, timer, ptimer, elapsed = 0;
+// ─── Audio-driven Engine ─────────────────────────────────────────────────────
+// Scene start times (seconds) — matched to voiceover timing
+const STARTS = [0, 5, 15, 24, 34, 44, 62, 68];
+const TOTAL  = 70; // approx audio duration in seconds
+
+let cur = 0;
 const stage = document.getElementById('stage');
 const nav   = document.getElementById('nav');
 const ctr   = document.getElementById('counter');
 const bar   = document.getElementById('pbar');
+
+// Create audio element
+const audio = document.createElement('audio');
+audio.src = './voice.mp3';
+audio.preload = 'auto';
+document.body.appendChild(audio);
+
+// Play button overlay
+const playBtn = document.createElement('div');
+playBtn.id = 'play-overlay';
+playBtn.innerHTML = `
+  <div style="display:flex;flex-direction:column;align-items:center;gap:16px">
+    <div style="width:90px;height:90px;border-radius:50%;background:#FFD700;
+      display:flex;align-items:center;justify-content:center;
+      box-shadow:0 0 40px rgba(255,215,0,.6);cursor:pointer">
+      <div style="width:0;height:0;border-top:20px solid transparent;
+        border-bottom:20px solid transparent;border-left:34px solid #1A1A1A;
+        margin-right:-6px"></div>
+    </div>
+    <div style="color:#FFD700;font-size:24px;font-weight:800;font-family:Cairo,sans-serif">
+      اضغط للتشغيل مع الصوت
+    </div>
+  </div>`;
+Object.assign(playBtn.style, {
+  position:'fixed', inset:'0', zIndex:'9999',
+  background:'rgba(10,10,30,.82)', display:'flex',
+  alignItems:'center', justifyContent:'center', cursor:'pointer',
+  backdropFilter:'blur(4px)'
+});
+document.body.appendChild(playBtn);
 
 function buildNav() {
   nav.innerHTML = '';
@@ -440,27 +474,54 @@ function buildNav() {
     const d = document.createElement('div');
     d.className = 'dot' + (i===cur?' active':'');
     d.style.width = i===cur ? '26px':'10px';
-    d.onclick = ()=>goTo(i);
+    d.onclick = () => { audio.currentTime = STARTS[i]; };
     nav.appendChild(d);
   });
 }
-function goTo(i) {
-  clearTimeout(timer); clearInterval(ptimer);
-  cur=i; elapsed=0; render();
-}
-function render() {
+
+function render(idx) {
+  if (idx === cur && stage.innerHTML) return;
+  cur = idx;
   stage.innerHTML = SCENES[cur].render();
   ctr.textContent = SCENES[cur].label + ' — ' + (cur+1) + '/' + SCENES.length;
   buildNav();
-  bar.style.width = '0%';
-  const d = SCENES[cur].dur;
-  ptimer = setInterval(()=>{elapsed+=50; bar.style.width=Math.min(elapsed/d*100,100)+'%';},50);
-  timer = setTimeout(()=>{clearInterval(ptimer); cur=(cur+1)%SCENES.length; elapsed=0; render();}, d);
 }
-render();
-document.addEventListener('keydown', e=>{
-  if(e.key==='ArrowRight'||e.key===' ') goTo((cur+1)%SCENES.length);
-  if(e.key==='ArrowLeft') goTo((cur-1+SCENES.length)%SCENES.length);
+
+// Drive scenes from audio time
+audio.addEventListener('timeupdate', () => {
+  const t = audio.currentTime;
+  // Progress bar
+  bar.style.width = Math.min(t / TOTAL * 100, 100) + '%';
+  // Find current scene
+  let idx = STARTS.length - 1;
+  for (let i = 0; i < STARTS.length - 1; i++) {
+    if (t < STARTS[i+1]) { idx = i; break; }
+  }
+  render(idx);
+});
+
+audio.addEventListener('ended', () => { bar.style.width = '100%'; });
+
+// Start on click
+playBtn.addEventListener('click', () => {
+  playBtn.remove();
+  audio.play();
+  render(0);
+});
+
+// Show first scene immediately (silent preview)
+render(0);
+
+// Keyboard controls
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === ' ') {
+    audio.currentTime = STARTS[Math.min(cur+1, STARTS.length-1)];
+    if (audio.paused) audio.play();
+  }
+  if (e.key === 'ArrowLeft') {
+    audio.currentTime = STARTS[Math.max(cur-1, 0)];
+    if (audio.paused) audio.play();
+  }
 });
 </script>
 </body>
