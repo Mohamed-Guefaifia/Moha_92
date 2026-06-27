@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>الغضب وكيف يدمر حياتك</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { width: 100vw; height: 100vh; overflow: hidden; font-family: 'Cairo', sans-serif; }
+
+@keyframes fadeIn    { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+@keyframes fadeInUp  { from{opacity:0;transform:translateY(40px)} to{opacity:1;transform:translateY(0)} }
+@keyframes float     { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+@keyframes floatSlow { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+@keyframes pulse     { 0%,100%{transform:scale(1)} 50%{transform:scale(1.1)} }
+@keyframes shake     { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-8px)} 75%{transform:translateX(8px)} }
+@keyframes shakeRot  { 0%,100%{transform:rotate(0)} 25%{transform:rotate(-6deg)} 75%{transform:rotate(6deg)} }
+@keyframes grow      { from{transform:scale(0);opacity:0} to{transform:scale(1);opacity:1} }
+@keyframes crumble   { 0%{transform:translateY(0) rotate(0);opacity:1} 100%{transform:translateY(60px) rotate(25deg);opacity:0} }
+@keyframes slideIn   { from{transform:translateX(-80px);opacity:0} to{transform:translateX(0);opacity:1} }
+@keyframes slideUp   { from{transform:translateY(50px);opacity:0} to{transform:translateY(0);opacity:1} }
+@keyframes writeIn   { from{clip-path:inset(0 100% 0 0)} to{clip-path:inset(0 0% 0 0)} }
+@keyframes flameWave { 0%,100%{transform:scaleY(1) skewX(0)} 50%{transform:scaleY(1.15) skewX(-4deg)} }
+@keyframes waterFall { from{transform:translateY(-30px);opacity:0} to{transform:translateY(0);opacity:1} }
+@keyframes extinguish{ from{transform:scale(1);opacity:1} to{transform:scale(0);opacity:0} }
+@keyframes glowPulse { 0%,100%{filter:drop-shadow(0 0 6px #FFD700)} 50%{filter:drop-shadow(0 0 20px #FFD700)} }
+@keyframes heartDrop { from{transform:translateY(-80px);opacity:0} to{transform:translateY(0);opacity:1} }
+@keyframes sunRise   { from{transform:translateY(60px);opacity:0} to{transform:translateY(0);opacity:1} }
+@keyframes sceneFade { from{opacity:0} to{opacity:1} }
+@keyframes arrowFly  { from{transform:translateX(-20px);opacity:0} to{transform:translateX(60px);opacity:0} }
+@keyframes runAway   { from{transform:translateX(0);opacity:1} to{transform:translateX(120px);opacity:0} }
+@keyframes vanish    { 0%{opacity:1;transform:scale(1)} 100%{opacity:0;transform:scale(0)} }
+
+.scene { position:absolute; inset:0; animation: sceneFade .5s ease both; }
+.title {
+  position:absolute; top:30px; left:50%; transform:translateX(-50%);
+  font-size:clamp(34px,4.5vw,58px); font-weight:900; white-space:nowrap;
+  text-shadow:3px 3px 0 rgba(0,0,0,.18); animation: fadeIn .7s ease both;
+}
+.sub {
+  position:absolute; bottom:55px; left:50%; transform:translateX(-50%);
+  font-size:clamp(16px,2vw,26px); font-weight:700;
+  background:rgba(255,255,255,.9); padding:10px 30px;
+  border-radius:40px; white-space:nowrap;
+  box-shadow:0 4px 18px rgba(0,0,0,.14);
+  animation: fadeIn .6s ease .4s both;
+}
+#nav {
+  position:fixed; bottom:16px; left:50%; transform:translateX(-50%);
+  display:flex; gap:9px; z-index:999;
+}
+.dot { height:9px; border-radius:5px; cursor:pointer; background:rgba(0,0,0,.25); transition:all .3s; }
+.dot.active { background:#1A1A1A; }
+#counter {
+  position:fixed; top:12px; right:16px; z-index:999;
+  background:rgba(0,0,0,.5); color:#fff;
+  padding:5px 16px; border-radius:20px; font-size:15px; font-weight:700;
+}
+#pbar { position:fixed; bottom:0; left:0; height:4px; background:#FFD700; transition:width .1s linear; z-index:999; }
+</style>
+</head>
+<body>
+<div id="counter"></div>
+<div id="nav"></div>
+<div id="pbar"></div>
+<div id="stage"></div>
+
+<script>
+const SCENES = [
+
+// ─── 1. HOOK — برج يتهدم ────────────────────────────────────────────────────
+{label:'لحظة واحدة', dur:5000, render:()=>`
+<div class="scene" style="background:#FFE566">
+  <svg viewBox="0 0 900 540" style="position:absolute;inset:0;width:100%;height:100%">
+    <rect x="0" y="430" width="900" height="110" fill="#C8A600"/>
+    <!-- Tower blocks being built -->
+    <g id="tower">
+      <rect x="405" y="360" width="90" height="70" rx="6" fill="#4ECDC4" stroke="#1A1A1A" stroke-width="3"/>
+      <rect x="415" y="290" width="70" height="72" rx="6" fill="#00DD88" stroke="#1A1A1A" stroke-width="3"/>
+      <rect x="425" y="230" width="50" height="62" rx="6" fill="#FFD700" stroke="#1A1A1A" stroke-width="3"/>
+      <!-- Star on top -->
+      <polygon points="450,195 455,210 472,210 459,220 464,235 450,225 436,235 441,220 428,210 445,210"
+        fill="#FFD700" stroke="#E6A800" stroke-width="2"/>
+    </g>
+    <!-- Happy stickman building -->
+    <g style="animation:floatSlow 2s ease-in-out infinite">
+      <circle cx="250" cy="310" r="26" fill="none" stroke="#1A1A1A" stroke-width="4"/>
+      <circle cx="243" cy="304" r="3" fill="#1A1A1A"/>
+      <circle cx="257" cy="304" r="3" fill="#1A1A1A"/>
+      <path d="M242 318 Q250 327 258 318" stroke="#1A1A1A" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <line x1="250" y1="336" x2="250" y2="390" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round"/>
+      <line x1="250" y1="354" x2="300" y2="340" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round"/>
+      <line x1="250" y1="354" x2="210" y2="345" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round"/>
+      <line x1="250" y1="390" x2="228" y2="428" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round"/>
+      <line x1="250" y1="390" x2="272" y2="428" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round"/>
+    </g>
+    <!-- Years label -->
+    <text x="450" y="140" text-anchor="middle" font-size="22" fill="#1A1A1A" font-weight="800"
+      font-family="Cairo,sans-serif" style="animation:fadeIn .5s ease .3s both">سنين من البناء...</text>
+    <!-- Explosion crack -->
+    <g style="animation:grow .4s ease 2.5s both">
+      <polygon points="450,430 420,370 440,375 430,310 460,360 480,350 465,400 490,395"
+        fill="#FF4444" opacity=".85"/>
+      <text x="560" y="360" font-size="50" style="animation:shake .3s ease 2.5s infinite">💥</text>
+    </g>
+    <!-- Crumbling blocks -->
+    <g style="animation:crumble 1s ease 3s both">
+      <rect x="405" y="360" width="90" height="70" rx="6" fill="#4ECDC4" stroke="#1A1A1A" stroke-width="3" opacity=".7"/>
+    </g>
+    <text x="450" y="500" text-anchor="middle" font-size="28" fill="#FF4444" font-weight="900"
+      font-family="Cairo,sans-serif" style="animation:fadeIn .4s ease 3.5s both">تهدّم في ثوانٍ!</text>
+  </svg>
+  <div class="title" style="color:#FF4444">لحظة غضب واحدة... 💥</div>
+  <div class="sub">تدمر ما بنيته في سنين.</div>
+</div>`},
+
+// ─── 2. QUESTIONS ─────────────────────────────────────────────────────────────
+{label:'الأسئلة', dur:5000, render:()=>`
+<div class="scene" style="background:#1A1A2E">
+  <svg viewBox="0 0 900 540" style="position:absolute;inset:0;width:100%;height:100%">
+    <!-- Stickman shouting with word-arrows -->
+    <circle cx="180" cy="270" r="28" fill="none" stroke="#FF4444" stroke-width="4.5"/>
+    <circle cx="172" cy="263" r="4" fill="#FF4444"/>
+    <circle cx="188" cy="263" r="4" fill="#FF4444"/>
+    <path d="M172 282 Q180 275 188 282" stroke="#FF4444" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    <line x1="180" y1="298" x2="180" y2="355" stroke="#FF4444" stroke-width="4.5" stroke-linecap="round"/>
+    <line x1="180" y1="316" x2="148" y2="305" stroke="#FF4444" stroke-width="4.5" stroke-linecap="round"/>
+    <line x1="180" y1="316" x2="212" y2="305" stroke="#FF4444" stroke-width="4.5" stroke-linecap="round"/>
+    <line x1="180" y1="355" x2="158" y2="392" stroke="#FF4444" stroke-width="4.5" stroke-linecap="round"/>
+    <line x1="180" y1="355" x2="202" y2="392" stroke="#FF4444" stroke-width="4.5" stroke-linecap="round"/>
+    <!-- Angry expression lines -->
+    <line x1="162" y1="248" x2="175" y2="256" stroke="#FF4444" stroke-width="3"/>
+    <line x1="198" y1="248" x2="185" y2="256" stroke="#FF4444" stroke-width="3"/>
+    <!-- word arrows flying -->
+    ${[['‼', 220, 265, '#FF4444'], ['💢', 280, 248, '#FF4444'], ['😤', 340, 260, '#FF6644']].map(
+      ([t,x,y,c],i)=>`<text x="${x}" y="${y}" font-size="36"
+        style="animation:arrowFly 1.2s ease ${i*.25}s infinite">${t}</text>`).join('')}
+    <!-- Questions appearing -->
+    <text x="450" y="160" text-anchor="middle" font-size="26" fill="#FFD700" font-weight="800"
+      font-family="Cairo,sans-serif" style="animation:fadeInUp .5s ease .3s both">
+      هل ندمت على كلمة قلتها في الغضب؟</text>
+    <text x="450" y="240" text-anchor="middle" font-size="26" fill="#FFE566" font-weight="800"
+      font-family="Cairo,sans-serif" style="animation:fadeInUp .5s ease .9s both">
+      هل الغضب قوة أم ضعف؟</text>
+    <text x="450" y="320" text-anchor="middle" font-size="26" fill="#FFD700" font-weight="800"
+      font-family="Cairo,sans-serif" style="animation:fadeInUp .5s ease 1.5s both">
+      لماذا أمرنا الإسلام بكظم الغيظ؟</text>
+    <!-- Question marks floating -->
+    ${[1,2,3].map((i)=>`
+      <text x="${580+i*60}" y="${200+i*50}" font-size="48" fill="rgba(255,215,0,.4)"
+        font-weight="900" style="animation:float ${1.5+i*.3}s ease-in-out ${i*.2}s infinite">؟</text>`).join('')}
+  </svg>
+  <div class="title" style="color:#FFD700">هل تعرف الإجابة؟</div>
+</div>`},
+
+// ─── 3. HADITH — الطومار الذهبي ──────────────────────────────────────────────
+{label:'الحديث الشريف', dur:6000, render:()=>`
+<div class="scene" style="background:#0D1B2A">
+  <svg viewBox="0 0 900 540" style="position:absolute;inset:0;width:100%;height:100%">
+    <!-- Scroll background -->
+    <rect x="80" y="140" width="740" height="260" rx="20" fill="#F5E6C8" stroke="#C8A600" stroke-width="4"
+      style="animation:grow .6s ease .2s both"/>
+    <!-- Scroll rollers -->
+    <ellipse cx="80" cy="270" rx="22" ry="135" fill="#C8A600" style="animation:grow .5s ease .1s both"/>
+    <ellipse cx="820" cy="270" rx="22" ry="135" fill="#C8A600" style="animation:grow .5s ease .1s both"/>
+    <!-- Decorative border -->
+    <rect x="92" y="152" width="716" height="236" rx="14" fill="none" stroke="#E6A800" stroke-width="2"
+      stroke-dasharray="12,6"/>
+    <!-- Hadith text -->
+    <text x="450" y="220" text-anchor="middle" font-size="19" fill="#8B6914" font-weight="700"
+      font-family="Cairo,sans-serif" style="animation:fadeIn .5s ease .8s both">قال النبي ﷺ:</text>
+    <text x="450" y="268" text-anchor="middle" font-size="24" fill="#1A1A1A" font-weight="900"
+      font-family="Cairo,sans-serif" style="animation:fadeIn .6s ease 1.1s both">
+      "ليس الشديد بالصُّرَعة،</text>
+    <text x="450" y="308" text-anchor="middle" font-size="24" fill="#1A1A1A" font-weight="900"
+      font-family="Cairo,sans-serif" style="animation:fadeIn .6s ease 1.6s both">
+      إنما الشديد الذي يملك نفسه</text>
+    <text x="450" y="348" text-anchor="middle" font-size="24" fill="#C8A600" font-weight="900"
+      font-family="Cairo,sans-serif" style="animation:fadeIn .6s ease 2s both">
+      عند الغضب."</text>
+    <!-- Source -->
+    <text x="450" y="388" text-anchor="middle" font-size="17" fill="#8B6914" font-weight="600"
+      font-family="Cairo,sans-serif" style="animation:fadeIn .4s ease 2.4s both">
+      متفق عليه — البخاري ومسلم</text>
+    <!-- Decorative stars -->
+    ${[-300,-150,0,150,300].map((x,i)=>`
+      <text x="${450+x}" y="180" font-size="18" fill="#E6A800" text-anchor="middle"
+        style="animation:pulse ${1.5+i*.2}s ease-in-out ${i*.15}s infinite">✦</text>`).join('')}
+  </svg>
+  <div class="title" style="color:#FFD700">الحديث الشريف 📜</div>
+</div>`},
+
+// ─── 4. BRAIN HIJACK ─────────────────────────────────────────────────────────
+{label:'اختطاف الدماغ', dur:5000, render:()=>`
+<div class="scene" style="background:#FFE566">
+  <svg viewBox="0 0 900 540" style="position:absolute;inset:0;width:100%;height:100%">
+    <rect x="0" y="430" width="900" height="110" fill="#C8A600"/>
+    <!-- Giant angry brain -->
+    <g style="animation:shakeRot .4s ease-in-out infinite;transform-origin:290px 250px">
+      <ellipse cx="290" cy="250" rx="160" ry="130" fill="#FF6666" stroke="#CC0000" stroke-width="4"/>
+      <ellipse cx="218" cy="210" rx="80" ry="68" fill="#FF8888" stroke="#CC0000" stroke-width="3"/>
+      <ellipse cx="362" cy="210" rx="80" ry="68" fill="#FF8888" stroke="#CC0000" stroke-width="3"/>
+      <path d="M240 255 Q272 232 306 255 Q340 278 372 255" stroke="#CC0000" stroke-width="3" fill="none"/>
+      <path d="M218 285 Q252 265 286 285" stroke="#CC0000" stroke-width="2.5" fill="none"/>
+      <!-- Angry brain face -->
+      <circle cx="266" cy="240" r="16" fill="white"/>
+      <circle cx="314" cy="240" r="16" fill="white"/>
+      <circle cx="272" cy="240" r="9" fill="#CC0000"/>
+      <circle cx="320" cy="240" r="9" fill="#CC0000"/>
+      <line x1="252" y1="222" x2="274" y2="231" stroke="#CC0000" stroke-width="4"/>
+      <line x1="328" y1="222" x2="306" y2="231" stroke="#CC0000" stroke-width="4"/>
+      <path d="M272 276 Q290 264 308 276" stroke="#CC0000" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+      <!-- Fire on brain -->
+      <text x="290" y="175" text-anchor="middle" font-size="36"
+        style="animation:flameWave .8s ease-in-out infinite">🔥</text>
+      <text x="250" y="160" font-size="24"
+        style="animation:flameWave .7s ease-in-out .1s infinite">🔥</text>
+      <text x="330" y="160" font-size="24"
+        style="animation:flameWave .9s ease-in-out .2s infinite">🔥</text>
+    </g>
+    <!-- Controlled stickman — brain takes over -->
+    <g style="animation:shake .3s ease infinite;transform-origin:660px 340px">
+      <circle cx="660" cy="280" r="26" fill="none" stroke="#1A1A1A" stroke-width="4"/>
+      <!-- Scared eyes -->
+      <circle cx="652" cy="274" r="4" fill="#1A1A1A"/>
+      <circle cx="668" cy="274" r="4" fill="#1A1A1A"/>
+      <circle cx="660" cy="287" r="6" fill="#1A1A1A"/>
+      <line x1="660" y1="306" x2="660" y2="360" stroke="#FF4444" stroke-width="4" stroke-linecap="round"/>
+      <line x1="660" y1="324" x2="625" y2="312" stroke="#FF4444" stroke-width="4" stroke-linecap="round"/>
+      <line x1="660" y1="324" x2="695" y2="312" stroke="#FF4444" stroke-width="4" stroke-linecap="round"/>
+      <line x1="660" y1="360" x2="638" y2="400" stroke="#FF4444" stroke-width="4" stroke-linecap="round"/>
+      <line x1="660" y1="360" x2="682" y2="400" stroke="#FF4444" stroke-width="4" stroke-linecap="round"/>
+      <!-- Control strings from brain -->
+      <line x1="450" y1="280" x2="630" y2="310" stroke="#CC0000" stroke-width="2.5"
+        stroke-dasharray="10,6" opacity=".7"/>
+    </g>
+    <!-- X over logic -->
+    <circle cx="760" cy="180" r="40" fill="#FFE566" stroke="#FF4444" stroke-width="3.5"
+      style="animation:grow .4s ease .5s both"/>
+    <text x="760" y="193" text-anchor="middle" font-size="38" fill="#FF4444" font-weight="900">✕</text>
+    <text x="760" y="240" text-anchor="middle" font-size="16" fill="#FF4444" font-weight="800"
+      font-family="Cairo,sans-serif">التفكير</text>
+  </svg>
+  <div class="title" style="color:#FF4444">الغضب يختطف دماغك! 🧠</div>
+  <div class="sub">يتوقف التفكير... ويبدأ التدمير.</div>
+</div>`},
+
+// ─── 5. QURAN VERSE ──────────────────────────────────────────────────────────
+{label:'الآية الكريمة', dur:6000, render:()=>`
+<div class="scene" style="background:#0D1B2A">
+  <svg viewBox="0 0 900 540" style="position:absolute;inset:0;width:100%;height:100%">
+    <!-- Gold radiance -->
+    ${[...Array(12)].map((_,i)=>`
+      <line x1="450" y1="270"
+        x2="${450+320*Math.cos(i*30*Math.PI/180)}"
+        y2="${270+320*Math.sin(i*30*Math.PI/180)}"
+        stroke="#FFD700" stroke-width="${i%3===0?2:1}" opacity="${i%3===0?.18:.08}"/>`).join('')}
+    <!-- Background frame -->
+    <rect x="60" y="120" width="780" height="300" rx="24"
+      fill="rgba(255,215,0,.06)" stroke="#FFD700" stroke-width="2" opacity=".6"
+      style="animation:glowPulse 3s ease-in-out infinite"/>
+    <!-- Decorative Islamic pattern corners -->
+    <text x="80" y="148" font-size="28" fill="#FFD700" opacity=".5">✦</text>
+    <text x="810" y="148" font-size="28" fill="#FFD700" opacity=".5">✦</text>
+    <text x="80" y="418" font-size="28" fill="#FFD700" opacity=".5">✦</text>
+    <text x="810" y="418" font-size="28" fill="#FFD700" opacity=".5">✦</text>
+    <!-- Quran verse -->
+    <text x="450" y="195" text-anchor="middle" font-size="18" fill="rgba(255,215,0,.7)"
+      font-family="Cairo,sans-serif" font-weight="600"
+      style="animation:fadeIn .5s ease .3s both">قال الله تعالى:</text>
+    <text x="450" y="255" text-anchor="middle" font-size="28" fill="#FFD700" font-weight="900"
+      font-family="Cairo,sans-serif" style="animation:fadeIn .7s ease .8s both">
+      ﴿وَالْكَاظِمِينَ الْغَيْظَ</text>
+    <text x="450" y="305" text-anchor="middle" font-size="28" fill="#FFD700" font-weight="900"
+      font-family="Cairo,sans-serif" style="animation:fadeIn .7s ease 1.4s both">
+      وَالْعَافِينَ عَنِ النَّاسِ</text>
+    <text x="450" y="355" text-anchor="middle" font-size="28" fill="#FFE566" font-weight="900"
+      font-family="Cairo,sans-serif" style="animation:fadeIn .7s ease 2s both">
+      وَاللَّهُ يُحِبُّ الْمُحْسِنِينَ﴾</text>
+    <text x="450" y="400" text-anchor="middle" font-size="18" fill="rgba(255,215,0,.6)"
+      font-family="Cairo,sans-serif" font-weight="700"
+      style="animation:fadeIn .4s ease 2.6s both">آل عمران: 134</text>
+    <!-- Floating stars -->
+    ${[0,1,2,3,4].map(i=>`
+      <circle cx="${120+i*165}" cy="460"
+        r="${4+i%2*2}" fill="#FFD700"
+        opacity="${.3+i*.08}"
+        style="animation:pulse ${1.5+i*.3}s ease-in-out ${i*.2}s infinite"/>`).join('')}
+  </svg>
+  <div class="title" style="color:#FFD700">﴿ والكاظمين الغيظ ﴾</div>
+</div>`},
+
+// ─── 6. FIRE EXTINGUISHED — 4 SOLUTIONS ──────────────────────────────────────
+{label:'الحل في 4 خطوات', dur:6000, render:()=>`
+<div class="scene" style="background:#FFE566">
+  <svg viewBox="0 0 900 540" style="position:absolute;inset:0;width:100%;height:100%">
+    <rect x="0" y="430" width="900" height="110" fill="#C8A600"/>
+    <!-- Steps -->
+    ${[
+      ['١', 'أعوذ بالله من الشيطان الرجيم', '#FF4444', 0],
+      ['٢', 'اصمت — الكلام في الغضب جرح', '#FF8800', .5],
+      ['٣', 'غيّر وضعيتك — اجلس أو اضطجع', '#0077CC', 1],
+      ['٤', 'توضأ — الماء يُطفئ النار', '#00AA55', 1.5],
+    ].map(([num, text, color, delay], i) => `
+      <g style="animation:slideIn .5s ease ${delay}s both">
+        <circle cx="90" cy="${130+i*75}" r="28" fill="${color}"/>
+        <text x="90" y="${138+i*75}" text-anchor="middle" font-size="26" fill="white"
+          font-weight="900" font-family="Cairo,sans-serif">${num}</text>
+        <rect x="128" y="${108+i*75}" width="600" height="48" rx="12"
+          fill="white" stroke="${color}" stroke-width="2.5"/>
+        <text x="420" y="${138+i*75}" text-anchor="middle" font-size="22" fill="#1A1A1A"
+          font-weight="800" font-family="Cairo,sans-serif">${text}</text>
+      </g>`).join('')}
+    <!-- Flame + water -->
+    <g style="animation:flameWave .7s ease-in-out infinite;transform-origin:730px 380px">
+      <polygon points="730,320 710,380 750,370 720,430 760,400 740,450 760,440 730,480"
+        fill="#FF4444" opacity=".9"/>
+      <polygon points="730,330 715,380 740,375 720,420 750,405 738,440 756,430 730,470"
+        fill="#FF6600" opacity=".7"/>
+    </g>
+    <!-- Water drops -->
+    <g style="animation:waterFall .8s ease 1.8s both">
+      ${[[718,310],[730,295],[745,308],[722,280]].map(([x,y],i)=>`
+        <ellipse cx="${x}" cy="${y}" rx="7" ry="11" fill="#00CFFF" opacity="${.8-i*.1}"
+          style="animation:waterFall .4s ease ${1.8+i*.15}s both"/>`).join('')}
+    </g>
+    <g style="animation:extinguish .6s ease 2.5s both;transform-origin:730px 380px">
+      <polygon points="730,320 710,380 750,370 720,430 760,400 740,450 760,440 730,480"
+        fill="#FF4444"/>
+    </g>
+  </svg>
+  <div class="title" style="color:#1A1A1A">الحل في 4 خطوات 💧</div>
+</div>`},
+
+// ─── 7. HEART FROM ABOVE ─────────────────────────────────────────────────────
+{label:'الله يحب الكاظمين', dur:5000, render:()=>`
+<div class="scene" style="background:#1A1A2E">
+  <svg viewBox="0 0 900 540" style="position:absolute;inset:0;width:100%;height:100%">
+    <!-- Stars background -->
+    ${[[120,80],[280,50],[500,90],[700,60],[800,110],[160,200],[600,150],[850,80]].map(([x,y],i)=>`
+      <circle cx="${x}" cy="${y}" r="${2+i%2}" fill="#FFD700"
+        opacity="${.4+i*.06}"
+        style="animation:pulse ${1.5+i*.2}s ease-in-out ${i*.15}s infinite"/>`).join('')}
+    <!-- Golden heart dropping -->
+    <g style="animation:heartDrop 1s ease .3s both">
+      <path d="M450 200 C450 200 380 140 340 180 C300 220 340 270 450 320 C560 270 600 220 560 180 C520 140 450 200 450 200Z"
+        fill="#FFD700" stroke="#E6A800" stroke-width="3"
+        style="animation:glowPulse 2s ease-in-out 1.5s infinite"/>
+      <!-- Sparkles around heart -->
+      ${[0,60,120,180,240,300].map((d,i)=>`
+        <circle cx="${450+140*Math.cos(d*Math.PI/180)}"
+                cy="${260+100*Math.sin(d*Math.PI/180)}"
+                r="5" fill="#FFD700" opacity=".6"
+                style="animation:pulse ${1+i*.2}s ease-in-out ${i*.1}s infinite"/>`).join('')}
+    </g>
+    <!-- Stickman receiving -->
+    <g style="animation:fadeIn .6s ease 1s both">
+      <circle cx="450" cy="400" r="26" fill="none" stroke="#FFD700" stroke-width="4"/>
+      <circle cx="443" cy="394" r="3" fill="#FFD700"/>
+      <circle cx="457" cy="394" r="3" fill="#FFD700"/>
+      <path d="M442 408 Q450 418 458 408" stroke="#FFD700" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <line x1="450" y1="426" x2="450" y2="478" stroke="#FFD700" stroke-width="4" stroke-linecap="round"/>
+      <!-- Arms open to receive -->
+      <line x1="450" y1="444" x2="405" y2="430" stroke="#FFD700" stroke-width="4" stroke-linecap="round"/>
+      <line x1="450" y1="444" x2="495" y2="430" stroke="#FFD700" stroke-width="4" stroke-linecap="round"/>
+      <line x1="450" y1="478" x2="428" y2="512" stroke="#FFD700" stroke-width="4" stroke-linecap="round"/>
+      <line x1="450" y1="478" x2="472" y2="512" stroke="#FFD700" stroke-width="4" stroke-linecap="round"/>
+    </g>
+    <!-- Text -->
+    <text x="450" y="110" text-anchor="middle" font-size="28" fill="#FFD700" font-weight="900"
+      font-family="Cairo,sans-serif" style="animation:fadeIn .5s ease 1.5s both">
+      ﴿ وَاللَّهُ يُحِبُّ الْمُحْسِنِينَ ﴾</text>
+  </svg>
+  <div class="title" style="color:#FFD700">الله يُحب من يكظم غيظه 💛</div>
+  <div class="sub" style="background:rgba(255,255,255,.9)">كظم الغيظ = محبة الله لك.</div>
+</div>`},
+
+// ─── 8. CLOSING — sunrise ─────────────────────────────────────────────────────
+{label:'ابدأ الآن', dur:6000, render:()=>`
+<div class="scene" style="background:linear-gradient(180deg,#0D1B2A 0%,#2D4A6E 40%,#FFE566 75%,#C8A600 100%)">
+  <svg viewBox="0 0 900 540" style="position:absolute;inset:0;width:100%;height:100%">
+    <!-- Sun -->
+    <g style="animation:sunRise 1.5s ease .2s both">
+      <circle cx="450" cy="240" r="68" fill="#FFD700" style="animation:glowPulse 2.5s ease-in-out infinite"/>
+      ${[0,30,60,90,120,150,180,210,240,270,300,330].map((d,i)=>`
+        <line x1="${450+76*Math.cos((d-90)*Math.PI/180)}"
+              y1="${240+76*Math.sin((d-90)*Math.PI/180)}"
+              x2="${450+100*Math.cos((d-90)*Math.PI/180)}"
+              y2="${240+100*Math.sin((d-90)*Math.PI/180)}"
+              stroke="#FFD700" stroke-width="4" stroke-linecap="round" opacity=".75"
+              style="animation:pulse 2s ease-in-out ${i*.08}s infinite"/>`).join('')}
+    </g>
+    <!-- Ground -->
+    <rect x="0" y="420" width="900" height="120" fill="#C8A600"/>
+    <!-- Calm stickman with crown -->
+    <g style="animation:walkIn .8s ease .5s both">
+      <circle cx="300" cy="355" r="28" fill="none" stroke="#1A1A1A" stroke-width="5"/>
+      <!-- Peaceful face -->
+      <circle cx="292" cy="348" r="3.5" fill="#1A1A1A"/>
+      <circle cx="308" cy="348" r="3.5" fill="#1A1A1A"/>
+      <path d="M291 362 Q300 372 309 362" stroke="#1A1A1A" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+      <line x1="300" y1="383" x2="300" y2="420" stroke="#1A1A1A" stroke-width="5" stroke-linecap="round"/>
+      <line x1="300" y1="398" x2="268" y2="386" stroke="#1A1A1A" stroke-width="5" stroke-linecap="round"/>
+      <line x1="300" y1="398" x2="332" y2="386" stroke="#1A1A1A" stroke-width="5" stroke-linecap="round"/>
+      <line x1="300" y1="420" x2="278" y2="456" stroke="#1A1A1A" stroke-width="5" stroke-linecap="round"/>
+      <line x1="300" y1="420" x2="322" y2="456" stroke="#1A1A1A" stroke-width="5" stroke-linecap="round"/>
+      <!-- Crown -->
+      <polygon points="274,328 283,308 300,322 317,308 326,328"
+        fill="#FFD700" stroke="#E6A800" stroke-width="2.5"
+        style="animation:float 2.5s ease-in-out infinite"/>
+      <rect x="274" y="328" width="52" height="14" rx="3" fill="#FFD700" stroke="#E6A800" stroke-width="2"/>
+    </g>
+    <!-- Final message -->
+    <text x="560" y="310" text-anchor="middle" font-size="32" fill="white" font-weight="900"
+      font-family="Cairo,sans-serif" style="animation:fadeIn .5s ease 1s both">
+      القوة الحقيقية =</text>
+    <text x="560" y="356" text-anchor="middle" font-size="32" fill="#FFD700" font-weight="900"
+      font-family="Cairo,sans-serif" style="animation:fadeIn .5s ease 1.4s both">
+      الصمت في الغضب</text>
+    <text x="560" y="400" text-anchor="middle" font-size="26" fill="#FFE566" font-weight="800"
+      font-family="Cairo,sans-serif" style="animation:fadeIn .5s ease 1.8s both">
+      ابدأ من الآن ←</text>
+  </svg>
+  <div class="title" style="color:#FFD700">القوة الحقيقية 👑</div>
+  <div class="sub">الغضب يدمر — والكظم يُعلي. اختر.</div>
+</div>`}
+];
+
+// ─── Engine ──────────────────────────────────────────────────────────────────
+let cur = 0, timer, ptimer, elapsed = 0;
+const stage = document.getElementById('stage');
+const nav   = document.getElementById('nav');
+const ctr   = document.getElementById('counter');
+const bar   = document.getElementById('pbar');
+
+function buildNav() {
+  nav.innerHTML = '';
+  SCENES.forEach((_,i) => {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i===cur?' active':'');
+    d.style.width = i===cur ? '26px':'10px';
+    d.onclick = ()=>goTo(i);
+    nav.appendChild(d);
+  });
+}
+function goTo(i) {
+  clearTimeout(timer); clearInterval(ptimer);
+  cur=i; elapsed=0; render();
+}
+function render() {
+  stage.innerHTML = SCENES[cur].render();
+  ctr.textContent = SCENES[cur].label + ' — ' + (cur+1) + '/' + SCENES.length;
+  buildNav();
+  bar.style.width = '0%';
+  const d = SCENES[cur].dur;
+  ptimer = setInterval(()=>{elapsed+=50; bar.style.width=Math.min(elapsed/d*100,100)+'%';},50);
+  timer = setTimeout(()=>{clearInterval(ptimer); cur=(cur+1)%SCENES.length; elapsed=0; render();}, d);
+}
+render();
+document.addEventListener('keydown', e=>{
+  if(e.key==='ArrowRight'||e.key===' ') goTo((cur+1)%SCENES.length);
+  if(e.key==='ArrowLeft') goTo((cur-1+SCENES.length)%SCENES.length);
+});
+</script>
+</body>
+</html>
