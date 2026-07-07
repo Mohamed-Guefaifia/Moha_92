@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" fill="none">
+  <!-- Scene 9: building good habits — climbing the stairs of boxes (like the
+       character reference image), confident -->
+  <ellipse cx="720" cy="608" rx="200" ry="16" fill="#c9c9c9" opacity="0.6"/>
+  <!-- stairs of boxes with up arrows -->
+  <g stroke="#111111" stroke-width="6">
+    <!-- bottom row -->
+    <rect x="150" y="520" width="130" height="80" fill="#a8a8a8"/>
+    <rect x="280" y="520" width="130" height="80" fill="#a8a8a8"/>
+    <rect x="410" y="520" width="130" height="80" fill="#a8a8a8"/>
+    <!-- middle row -->
+    <rect x="280" y="440" width="130" height="80" fill="#a8a8a8"/>
+    <rect x="410" y="440" width="130" height="80" fill="#a8a8a8"/>
+    <!-- top row -->
+    <rect x="410" y="360" width="130" height="80" fill="#a8a8a8"/>
+    <!-- arrows -->
+    <g stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M215 585 L215 545 M200 558 L215 542 L230 558"/>
+      <path d="M345 585 L345 545 M330 558 L345 542 L360 558"/>
+      <path d="M475 585 L475 545 M460 558 L475 542 L490 558"/>
+      <path d="M345 505 L345 465 M330 478 L345 462 L360 478"/>
+      <path d="M475 505 L475 465 M460 478 L475 462 L490 478"/>
+      <path d="M475 425 L475 385 M460 398 L475 382 L490 398"/>
+    </g>
+  </g>
+  <!-- character walking up, holding a new box -->
+  <circle cx="820" cy="170" r="64" fill="#ffffff" stroke="#111111" stroke-width="8"/>
+  <!-- determined eyebrows -->
+  <path d="M770 126 L814 118" stroke="#111111" stroke-width="7" stroke-linecap="round"/>
+  <path d="M832 116 L876 126" stroke="#111111" stroke-width="7" stroke-linecap="round"/>
+  <ellipse cx="798" cy="164" rx="17" ry="22" fill="#ffffff" stroke="#111111" stroke-width="6"/>
+  <ellipse cx="846" cy="162" rx="19" ry="24" fill="#ffffff" stroke="#111111" stroke-width="6"/>
+  <circle cx="792" cy="168" r="7" fill="#111111"/>
+  <circle cx="840" cy="166" r="7.5" fill="#111111"/>
+  <!-- confident smile -->
+  <path d="M800 206 Q824 220 850 202" stroke="#111111" stroke-width="7" stroke-linecap="round"/>
+  <!-- body leaning forward -->
+  <path d="M820 234 Q808 320 796 400" stroke="#111111" stroke-width="16" stroke-linecap="round"/>
+  <!-- arms holding a box forward -->
+  <path d="M814 275 Q730 300 672 330" stroke="#111111" stroke-width="13" stroke-linecap="round"/>
+  <path d="M812 300 Q744 336 700 360" stroke="#111111" stroke-width="13" stroke-linecap="round"/>
+  <g stroke="#111111" stroke-width="6">
+    <rect x="560" y="310" width="120" height="74" fill="#a8a8a8"/>
+    <path d="M620 368 L620 332 M606 344 L620 328 L634 344" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <circle cx="668" cy="334" r="12" fill="#111111"/>
+  <circle cx="696" cy="363" r="12" fill="#111111"/>
+  <!-- legs: one foot on the first step -->
+  <path d="M796 400 Q740 450 640 470" stroke="#111111" stroke-width="14" stroke-linecap="round"/>
+  <path d="M796 400 Q830 500 850 590" stroke="#111111" stroke-width="14" stroke-linecap="round"/>
+  <path d="M640 472 L600 452" stroke="#111111" stroke-width="13" stroke-linecap="round"/>
+  <path d="M850 592 L894 596" stroke="#111111" stroke-width="13" stroke-linecap="round"/>
+</svg>

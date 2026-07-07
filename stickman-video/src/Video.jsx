@@ -19,6 +19,13 @@ export const StickmanVideo = ({data, words}) => {
   const {fps, width, height} = useVideoConfig();
   const portrait = height > width;
 
+  // Quote cards display their own text full-screen — hide the bottom
+  // captions while one is on screen (matches the reference video).
+  const quoteRanges = data.scenes.filter((s) => s.type === 'quote');
+  const visibleWords = words.filter(
+    (w) => !quoteRanges.some((q) => w.start >= q.start && w.start < q.end)
+  );
+
   return (
     <AbsoluteFill>
       <PaperBackground />
@@ -47,7 +54,7 @@ export const StickmanVideo = ({data, words}) => {
           </Sequence>
         );
       })}
-      <WordCaptions words={words} portrait={portrait} />
+      <WordCaptions words={visibleWords} portrait={portrait} />
       {data.audio ? <Audio src={staticFile(data.audio)} /> : null}
     </AbsoluteFill>
   );

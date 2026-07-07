@@ -7,7 +7,7 @@ import {
 } from 'remotion';
 import {CAPTION_FONT, QUOTE_FONT} from '../fonts.js';
 
-const PAGE_GAP_SECONDS = 0.9; // silence longer than this starts a new page
+const PAGE_GAP_SECONDS = 0.55; // silence longer than this starts a new page
 const PAGE_HANG_SECONDS = 0.6; // keep the page on screen a bit after the last word
 
 // Split the word list into caption "pages". A page ends on a long pause or
@@ -44,9 +44,10 @@ export const WordCaptions = ({words, portrait}) => {
   const page = pages.find((p, i) => {
     const start = p[0].start;
     const next = pages[i + 1];
-    const end = next
-      ? next[0].start
-      : p[p.length - 1].end + PAGE_HANG_SECONDS;
+    const end = Math.min(
+      next ? next[0].start : Infinity,
+      p[p.length - 1].end + PAGE_HANG_SECONDS
+    );
     return t >= start && t < end;
   });
 

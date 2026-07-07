@@ -1,29 +1,35 @@
 {
-  "audio": null,
-  "durationInSeconds": 15,
+  "audio": "audio.mp3",
   "scenes": [
-    {"type": "image", "src": "demo/scene-01.svg", "start": 0, "end": 5},
-    {
-      "type": "quote",
-      "variant": "ornate",
-      "title": "سُورَةُ الإسْرَاء",
-      "start": 5,
-      "end": 10,
-      "segments": [
-        {"text": "أَقِمِ الصَّلَاةَ لِدُلُوكِ الشَّمْسِ إِلَىٰ غَسَقِ اللَّيْلِ", "highlight": true},
-        {"text": " وَقُرْآنَ الْفَجْرِ ۖ إِنَّ قُرْآنَ الْفَجْرِ كَانَ مَشْهُودًا"}
-      ]
-    },
+    {"type": "image", "src": "scenes/munafiqin/scene-01.svg", "start": 0, "end": 13.96},
+    {"type": "image", "src": "scenes/munafiqin/scene-02.svg", "start": 13.96, "end": 24.12},
+    {"type": "image", "src": "scenes/munafiqin/scene-03.svg", "start": 24.12, "end": 33.01},
+    {"type": "image", "src": "scenes/munafiqin/scene-04.svg", "start": 33.01, "end": 43.2},
     {
       "type": "quote",
       "variant": "note",
-      "title": "وقال النبي ﷺ:",
-      "start": 10,
-      "end": 15,
+      "title": "قال النبي ﷺ:",
+      "start": 43.2,
+      "end": 57.25,
       "segments": [
-        {"text": "فإن استيقظ فذكر الله انحلت عقدة", "highlight": true},
-        {"text": " فإن توضأ انحلت عقدة فإن صلى انحلت عقدة"}
+        {"text": "آية المنافق ثلاث:", "highlight": true},
+        {"text": " إذا حدّث كذب، وإذا وعد أخلف، وإذا اؤتمن خان"}
       ]
-    }
+    },
+    {"type": "image", "src": "scenes/munafiqin/scene-06.svg", "start": 57.25, "end": 65.03},
+    {
+      "type": "quote",
+      "variant": "ornate",
+      "title": "سُورَةُ النِّسَاء",
+      "start": 65.03,
+      "end": 76.85,
+      "segments": [
+        {"text": "وَإِذَا قَامُوا إِلَى الصَّلَاةِ قَامُوا كُسَالَىٰ", "highlight": true},
+        {"text": " يُرَاءُونَ النَّاسَ وَلَا يَذْكُرُونَ اللَّهَ إِلَّا قَلِيلًا"}
+      ]
+    },
+    {"type": "image", "src": "scenes/munafiqin/scene-08.svg", "start": 76.85, "end": 87.25},
+    {"type": "image", "src": "scenes/munafiqin/scene-09.svg", "start": 87.25, "end": 96.48},
+    {"type": "image", "src": "scenes/munafiqin/scene-10.svg", "start": 96.48, "end": 107.4}
   ]
 }

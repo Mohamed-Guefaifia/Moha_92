@@ -64,6 +64,12 @@ Rules for every scene image:
 Use the image-generation MCP tools available in the session (run `ToolSearch`
 with "generate image" — e.g. Higgsfield), with
 `public/character/reference.png` as the character reference (Step 2).
+**Free fallback (no credits / no image MCP):** hand-draw each scene as an
+SVG in the character's exact style — copy the anatomy from
+`public/scenes/munafiqin/*.svg` (head r≈66 stroke 8, big oval eyes with
+pupils, expressive brows, body stroke 16, limbs 13-14, grey props
+`#a8a8a8`, ground-shadow ellipse) and only change pose/expression/props.
+Render a still of every scene to check it before the final render.
 Generate one image per scene at the target aspect ratio and save them as
 `stickman-video/public/scenes/scene-01.png`, `scene-02.png`, … White
 backgrounds are fine: the composition uses `mix-blend-mode: multiply` so
@@ -76,6 +82,13 @@ scene where the face, proportions or line style drift off-model.
 Use the TTS MCP tools available in the session (run `ToolSearch` with
 "voiceover" — e.g. `vidiq_voiceover_generate`) with an Arabic voice, or use
 the user's provided audio. Save as `stickman-video/public/audio.mp3`.
+
+**Free fallback (no credits / no MCP TTS):** write the script as clauses in
+`content/<name>.json` (see `content/sifat-almunafiqin.json`) and run
+`python3 scripts/tts_google.py content/<name>.json`. It synthesizes each
+clause via Google Translate TTS, stitches `public/audio.mp3`, and writes
+**exact word timings** to `src/data/words.json` plus per-scene times to
+`content/<name>.timing.json` — steps 5 and most of 6 are then already done.
 
 ## Step 5 — Word-level timestamps
 
