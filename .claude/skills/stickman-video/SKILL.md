@@ -9,6 +9,23 @@ Produce a professional stickman doodle video (paper texture background, one
 consistent hand-drawn stickman character, AI voiceover, word-by-word synced
 captions in Baloo Bhaijaan 2) using the Remotion project in `stickman-video/`.
 
+## APPROVED STYLE TEMPLATE — reproduce it exactly
+
+The user approved the produced video «صفات المنافقين» (content
+`content/sifat-almunafiqin.json` + scenes `public/scenes/munafiqin/`) as THE
+template for every future video and short. Reproduce its look exactly:
+
+- same character (`public/character/reference.png`), same SVG anatomy as
+  `public/scenes/munafiqin/*.svg`
+- paper background, grey `#a8a8a8` props, ground-shadow ellipse
+- bottom captions in Baloo Bhaijaan 2 ExtraBold, word-by-word, grey→black
+- `note` cards for hadiths, `ornate` cards for Quran verses (captions
+  auto-hide during cards)
+- ~10 scenes, hook → explanation → takeaway, clause-based narration
+- deliver BOTH `Video` (16:9) and `Short` (9:16) unless told otherwise
+
+Only the topic, script, poses, and props change between videos.
+
 ## Inputs to collect from the user
 
 1. **Topic or full script** (Arabic by default). If only a topic is given,
