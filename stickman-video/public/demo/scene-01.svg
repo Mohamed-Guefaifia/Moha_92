@@ -1,36 +1,37 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" fill="none">
-  <!-- Demo stickman: round head, clean black ink lines, holding a microphone -->
-  <g stroke="#141414" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
-    <!-- head -->
-    <circle cx="330" cy="130" r="58" fill="none"/>
-    <!-- face -->
-    <circle cx="312" cy="118" r="4.5" fill="#141414" stroke="none"/>
-    <circle cx="348" cy="118" r="4.5" fill="#141414" stroke="none"/>
-    <path d="M310 148 Q330 164 352 146" stroke-width="6"/>
-    <!-- hair strokes -->
-    <path d="M318 72 L314 56" stroke-width="5"/>
-    <path d="M332 70 L332 52" stroke-width="5"/>
-    <path d="M346 72 L352 56" stroke-width="5"/>
-    <!-- body -->
-    <path d="M330 188 L330 380"/>
-    <!-- left arm holding mic up -->
-    <path d="M330 230 Q285 250 258 210"/>
-    <!-- right arm gesturing out -->
-    <path d="M330 240 Q400 260 452 226"/>
-    <ellipse cx="466" cy="219" rx="17" ry="12" fill="none" stroke-width="6"/>
-    <!-- legs -->
-    <path d="M330 380 L282 520"/>
-    <path d="M330 380 L382 520"/>
-    <!-- feet -->
-    <path d="M282 520 L258 524"/>
-    <path d="M382 520 L406 524"/>
-    <!-- ground line -->
-    <path d="M240 540 L430 540" stroke-width="5"/>
+  <!-- Demo of the official character (see public/character/reference.png):
+       big round white head, large oval eyes, expressive eyebrows, confident
+       smile, solid black stick body with thick rounded limbs, grey shadow. -->
+  <!-- ground shadow -->
+  <ellipse cx="400" cy="548" rx="160" ry="16" fill="#c9c9c9" opacity="0.6"/>
+  <!-- head -->
+  <circle cx="400" cy="140" r="74" fill="#ffffff" stroke="#111111" stroke-width="9"/>
+  <!-- eyebrows -->
+  <path d="M352 104 L394 96" stroke="#111111" stroke-width="8" stroke-linecap="round"/>
+  <path d="M410 94 L450 103" stroke="#111111" stroke-width="8" stroke-linecap="round"/>
+  <!-- eyes -->
+  <ellipse cx="376" cy="134" rx="19" ry="24" fill="#ffffff" stroke="#111111" stroke-width="6"/>
+  <ellipse cx="428" cy="132" rx="21" ry="26" fill="#ffffff" stroke="#111111" stroke-width="6"/>
+  <circle cx="382" cy="139" r="8" fill="#111111"/>
+  <circle cx="434" cy="137" r="8.5" fill="#111111"/>
+  <!-- smile -->
+  <path d="M376 176 Q402 193 430 172" stroke="#111111" stroke-width="7" stroke-linecap="round"/>
+  <!-- body -->
+  <path d="M400 214 L400 382" stroke="#111111" stroke-width="17" stroke-linecap="round"/>
+  <!-- left arm holding a grey box -->
+  <path d="M400 252 Q345 280 306 322" stroke="#111111" stroke-width="14" stroke-linecap="round"/>
+  <circle cx="300" cy="329" r="13" fill="#111111"/>
+  <g stroke="#111111" stroke-width="6" stroke-linejoin="round">
+    <rect x="240" y="322" width="96" height="52" fill="#a8a8a8"/>
+    <path d="M288 364 L288 340 M278 350 L288 338 L298 350" stroke-width="7" stroke-linecap="round"/>
   </g>
-  <!-- microphone -->
-  <g stroke="#141414" stroke-width="6" stroke-linecap="round">
-    <rect x="238" y="168" width="26" height="44" rx="13" fill="#141414"/>
-    <path d="M251 212 L251 196"/>
-    <path d="M232 178 L226 170 M270 178 L276 170 M251 158 L251 148" stroke-width="4"/>
-  </g>
+  <!-- right arm gesturing up -->
+  <path d="M400 246 Q462 258 502 226" stroke="#111111" stroke-width="14" stroke-linecap="round"/>
+  <circle cx="508" cy="222" r="13" fill="#111111"/>
+  <!-- legs, walking pose -->
+  <path d="M400 380 Q372 462 344 524" stroke="#111111" stroke-width="15" stroke-linecap="round"/>
+  <path d="M400 380 Q438 462 468 524" stroke="#111111" stroke-width="15" stroke-linecap="round"/>
+  <!-- flat feet -->
+  <path d="M344 526 L300 530" stroke="#111111" stroke-width="14" stroke-linecap="round"/>
+  <path d="M468 526 L514 530" stroke="#111111" stroke-width="14" stroke-linecap="round"/>
 </svg>

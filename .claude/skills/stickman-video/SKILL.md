@@ -33,29 +33,43 @@ scenes; scale proportionally for longer videos). For each scene write:
 
 Show the full script to the user for approval before generating assets.
 
-## Step 2 — Character base prompt (NEVER change it between scenes)
+## Step 2 — The character (FIXED — never redesign it)
 
-Every image prompt MUST begin with this base, so the character stays
-identical across all scenes and all videos:
+The user's official character is the reference image at
+`stickman-video/public/character/reference.png`. It must look EXACTLY the
+same in every scene of every video. Its description:
 
-> Simple black stickman character with a perfectly round head, drawn with
-> clean smooth black ink lines, hand-drawn doodle style, consistent thick
-> line weight, small dot eyes and a simple curved smile, a few short hair
-> strokes on top of the head, minimalist flat illustration, no shading, no
-> color, plain white background.
+> Cartoon stickman with a large round white head outlined with a thick black
+> line, two big oval white eyes with black pupils, expressive black
+> eyebrows, a small confident smile, a solid black stick body with thick
+> rounded limbs, simple black rounded hands and flat black feet, a soft grey
+> shadow on the ground beneath him, clean white background, modern flat
+> vector cartoon style with bold clean lines.
 
-Then append: `Use the same stickman character as before.` + the scene
-description + the aspect ratio (16:9 landscape or 9:16 portrait).
+Rules for every scene image:
+
+1. **Always pass the reference image** to the image tool as a
+   character/image reference (image-to-image) when the tool supports it —
+   this is the preferred way to keep the character identical.
+2. Always start the text prompt with the base description above, then
+   `Use the same stickman character as before.` + pose, action, facial
+   expression, at least one prop + the aspect ratio (16:9 or 9:16).
+3. Props: simple flat objects with black outlines and light grey fill
+   (like the boxes in the reference image).
+4. Only pose, expression and props may change — never the face, the head
+   shape, the line style or the proportions.
 
 ## Step 3 — Generate the scene images
 
 Use the image-generation MCP tools available in the session (run `ToolSearch`
-with "generate image" — e.g. Higgsfield). Generate one image per scene at the
-target aspect ratio and save them as `stickman-video/public/scenes/scene-01.png`,
-`scene-02.png`, … White backgrounds are fine: the composition uses
-`mix-blend-mode: multiply` so white melts into the paper texture.
-View each generated image to verify the character is consistent; regenerate
-any scene that drifts off-model.
+with "generate image" — e.g. Higgsfield), with
+`public/character/reference.png` as the character reference (Step 2).
+Generate one image per scene at the target aspect ratio and save them as
+`stickman-video/public/scenes/scene-01.png`, `scene-02.png`, … White
+backgrounds are fine: the composition uses `mix-blend-mode: multiply` so
+white melts into the paper texture.
+**View every generated image next to the reference** and regenerate any
+scene where the face, proportions or line style drift off-model.
 
 ## Step 4 — Generate the voiceover
 
