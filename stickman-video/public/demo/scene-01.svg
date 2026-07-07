@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" fill="none">
+  <!-- Demo stickman: round head, clean black ink lines, holding a microphone -->
+  <g stroke="#141414" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <!-- head -->
+    <circle cx="330" cy="130" r="58" fill="none"/>
+    <!-- face -->
+    <circle cx="312" cy="118" r="4.5" fill="#141414" stroke="none"/>
+    <circle cx="348" cy="118" r="4.5" fill="#141414" stroke="none"/>
+    <path d="M310 148 Q330 164 352 146" stroke-width="6"/>
+    <!-- hair strokes -->
+    <path d="M318 72 L314 56" stroke-width="5"/>
+    <path d="M332 70 L332 52" stroke-width="5"/>
+    <path d="M346 72 L352 56" stroke-width="5"/>
+    <!-- body -->
+    <path d="M330 188 L330 380"/>
+    <!-- left arm holding mic up -->
+    <path d="M330 230 Q285 250 258 210"/>
+    <!-- right arm gesturing out -->
+    <path d="M330 240 Q400 260 452 226"/>
+    <ellipse cx="466" cy="219" rx="17" ry="12" fill="none" stroke-width="6"/>
+    <!-- legs -->
+    <path d="M330 380 L282 520"/>
+    <path d="M330 380 L382 520"/>
+    <!-- feet -->
+    <path d="M282 520 L258 524"/>
+    <path d="M382 520 L406 524"/>
+    <!-- ground line -->
+    <path d="M240 540 L430 540" stroke-width="5"/>
+  </g>
+  <!-- microphone -->
+  <g stroke="#141414" stroke-width="6" stroke-linecap="round">
+    <rect x="238" y="168" width="26" height="44" rx="13" fill="#141414"/>
+    <path d="M251 212 L251 196"/>
+    <path d="M232 178 L226 170 M270 178 L276 170 M251 158 L251 148" stroke-width="4"/>
+  </g>
+</svg>
