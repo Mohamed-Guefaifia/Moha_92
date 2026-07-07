@@ -33,8 +33,10 @@ export const SceneImage = ({src, durationInFrames, portrait}) => {
       style={{
         alignItems: 'center',
         justifyContent: 'center',
-        // Reserve room for the captions at the bottom.
-        padding: portrait ? '8% 4% 30% 4%' : '4% 6% 20% 6%',
+        // Reserve room for the captions. Portrait mirrors the approved 16:9
+        // look: artwork spans the full width in the upper half, captions
+        // sit right below it.
+        padding: portrait ? '16% 2% 46% 2%' : '4% 6% 20% 6%',
       }}
     >
       <Img

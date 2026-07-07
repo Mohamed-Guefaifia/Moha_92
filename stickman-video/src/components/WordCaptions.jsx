@@ -38,7 +38,7 @@ export const WordCaptions = ({words, portrait}) => {
   const {fps, width} = useVideoConfig();
   const t = frame / fps;
 
-  const maxWords = portrait ? 4 : 5;
+  const maxWords = 5; // same paging in both formats (approved template)
   const pages = useMemo(() => paginate(words, maxWords), [words, maxWords]);
 
   const page = pages.find((p, i) => {
@@ -53,16 +53,19 @@ export const WordCaptions = ({words, portrait}) => {
 
   if (!page) return null;
 
-  const fontSize = portrait ? width * 0.075 : width * 0.052;
+  const fontSize = portrait ? width * 0.064 : width * 0.052;
 
   return (
     <AbsoluteFill
       style={{
         alignItems: 'center',
-        justifyContent: 'flex-end',
-        paddingBottom: portrait ? '16%' : '5.5%',
-        paddingLeft: '6%',
-        paddingRight: '6%',
+        // Portrait: captions directly below the artwork (like the approved
+        // 16:9 look); landscape: near the bottom edge.
+        justifyContent: portrait ? 'flex-start' : 'flex-end',
+        paddingTop: portrait ? '102%' : 0,
+        paddingBottom: portrait ? 0 : '5.5%',
+        paddingLeft: '5%',
+        paddingRight: '5%',
       }}
     >
       <div
