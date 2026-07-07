@@ -1,35 +1,66 @@
 {
   "audio": "audio.mp3",
   "scenes": [
-    {"type": "image", "src": "scenes/munafiqin/scene-01.svg", "start": 0, "end": 13.96},
-    {"type": "image", "src": "scenes/munafiqin/scene-02.svg", "start": 13.96, "end": 24.12},
-    {"type": "image", "src": "scenes/munafiqin/scene-03.svg", "start": 24.12, "end": 33.01},
-    {"type": "image", "src": "scenes/munafiqin/scene-04.svg", "start": 33.01, "end": 43.2},
+    {"type": "image", "src": "scenes/nifaq/scene-01.png", "start": 0, "end": 10.27},
+    {
+      "type": "quote",
+      "variant": "ornate",
+      "title": "سُورَةُ البَقَرَة",
+      "start": 10.27,
+      "end": 21.2,
+      "segments": [
+        {"text": "وَمِنَ النَّاسِ مَن يَقُولُ آمَنَّا بِاللَّهِ وَبِالْيَوْمِ الْآخِرِ", "highlight": true},
+        {"text": " وَمَا هُم بِمُؤْمِنِينَ"}
+      ]
+    },
+    {"type": "image", "src": "scenes/nifaq/scene-03.png", "start": 21.2, "end": 27.2},
+    {"type": "image", "src": "scenes/nifaq/scene-04.png", "start": 27.2, "end": 32.94},
+    {"type": "image", "src": "scenes/nifaq/scene-05.png", "start": 32.94, "end": 40.05},
+    {"type": "image", "src": "scenes/nifaq/scene-06.png", "start": 40.05, "end": 49.08},
+    {"type": "image", "src": "scenes/nifaq/scene-07.png", "start": 49.08, "end": 58.45},
     {
       "type": "quote",
       "variant": "note",
       "title": "قال النبي ﷺ:",
-      "start": 43.2,
-      "end": 57.25,
+      "start": 58.45,
+      "end": 72.51,
       "segments": [
         {"text": "آية المنافق ثلاث:", "highlight": true},
         {"text": " إذا حدّث كذب، وإذا وعد أخلف، وإذا اؤتمن خان"}
       ]
     },
-    {"type": "image", "src": "scenes/munafiqin/scene-06.svg", "start": 57.25, "end": 65.03},
+    {"type": "image", "src": "scenes/nifaq/scene-09.png", "start": 72.51, "end": 82.02},
+    {"type": "image", "src": "scenes/nifaq/scene-10.png", "start": 82.02, "end": 89.77},
     {
       "type": "quote",
       "variant": "ornate",
       "title": "سُورَةُ النِّسَاء",
-      "start": 65.03,
-      "end": 76.85,
+      "start": 89.77,
+      "end": 101.59,
       "segments": [
         {"text": "وَإِذَا قَامُوا إِلَى الصَّلَاةِ قَامُوا كُسَالَىٰ", "highlight": true},
         {"text": " يُرَاءُونَ النَّاسَ وَلَا يَذْكُرُونَ اللَّهَ إِلَّا قَلِيلًا"}
       ]
     },
-    {"type": "image", "src": "scenes/munafiqin/scene-08.svg", "start": 76.85, "end": 87.25},
-    {"type": "image", "src": "scenes/munafiqin/scene-09.svg", "start": 87.25, "end": 96.48},
-    {"type": "image", "src": "scenes/munafiqin/scene-10.svg", "start": 96.48, "end": 107.4}
+    {"type": "image", "src": "scenes/nifaq/scene-12.png", "start": 101.59, "end": 109.21},
+    {"type": "image", "src": "scenes/nifaq/scene-13.png", "start": 109.21, "end": 115.33},
+    {"type": "image", "src": "scenes/nifaq/scene-14.png", "start": 115.33, "end": 123.93},
+    {"type": "image", "src": "scenes/nifaq/scene-15.png", "start": 123.93, "end": 131.59},
+    {
+      "type": "quote",
+      "variant": "note",
+      "title": "قال النبي ﷺ:",
+      "start": 131.59,
+      "end": 145.3,
+      "segments": [
+        {"text": "تجدون شرّ الناس ذا الوجهين", "highlight": true},
+        {"text": " الذي يأتي هؤلاء بوجه وهؤلاء بوجه"}
+      ]
+    },
+    {"type": "image", "src": "scenes/nifaq/scene-17.png", "start": 145.3, "end": 151.57},
+    {"type": "image", "src": "scenes/nifaq/scene-18.png", "start": 151.57, "end": 157.55},
+    {"type": "image", "src": "scenes/nifaq/scene-19.png", "start": 157.55, "end": 167.95},
+    {"type": "image", "src": "scenes/nifaq/scene-20.png", "start": 167.95, "end": 179.29},
+    {"type": "image", "src": "scenes/nifaq/scene-21.png", "start": 179.29, "end": 194.35}
   ]
 }
