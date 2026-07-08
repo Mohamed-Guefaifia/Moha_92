@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" fill="none">
+  <!-- Scene 10: dua — hands raised, closed peaceful eyes, crescent -->
+  <ellipse cx="600" cy="600" rx="170" ry="16" fill="#c9c9c9" opacity="0.6"/>
+  <!-- crescent -->
+  <path d="M300 90 A70 70 0 1 0 370 180 A56 56 0 1 1 300 90 Z" fill="#a8a8a8"/>
+  <!-- light rays above the head -->
+  <g stroke="#9a9a9a" stroke-width="8" stroke-linecap="round">
+    <path d="M600 60 L600 20"/>
+    <path d="M520 84 L492 54"/>
+    <path d="M680 84 L708 54"/>
+  </g>
+  <!-- head -->
+  <circle cx="600" cy="180" r="66" fill="#ffffff" stroke="#111111" stroke-width="8"/>
+  <!-- peaceful eyebrows -->
+  <path d="M548 136 Q566 126 586 132" stroke="#111111" stroke-width="7" stroke-linecap="round"/>
+  <path d="M614 130 Q636 124 652 134" stroke="#111111" stroke-width="7" stroke-linecap="round"/>
+  <!-- closed eyes: gentle arcs -->
+  <path d="M560 178 Q578 190 596 178" stroke="#111111" stroke-width="6" stroke-linecap="round"/>
+  <path d="M612 176 Q632 188 652 176" stroke="#111111" stroke-width="6" stroke-linecap="round"/>
+  <!-- gentle smile -->
+  <path d="M574 220 Q600 234 628 218" stroke="#111111" stroke-width="7" stroke-linecap="round"/>
+  <!-- body -->
+  <path d="M600 246 L600 425" stroke="#111111" stroke-width="16" stroke-linecap="round"/>
+  <!-- both arms raised in dua, open palms -->
+  <path d="M600 300 Q520 260 490 180" stroke="#111111" stroke-width="13" stroke-linecap="round"/>
+  <path d="M600 300 Q680 260 710 180" stroke="#111111" stroke-width="13" stroke-linecap="round"/>
+  <ellipse cx="484" cy="164" rx="16" ry="22" transform="rotate(-25 484 164)" fill="#111111"/>
+  <ellipse cx="716" cy="164" rx="16" ry="22" transform="rotate(25 716 164)" fill="#111111"/>
+  <!-- legs together -->
+  <path d="M600 425 Q588 500 580 568" stroke="#111111" stroke-width="14" stroke-linecap="round"/>
+  <path d="M600 425 Q614 500 622 568" stroke="#111111" stroke-width="14" stroke-linecap="round"/>
+  <path d="M580 570 L540 574" stroke="#111111" stroke-width="13" stroke-linecap="round"/>
+  <path d="M622 570 L664 574" stroke="#111111" stroke-width="13" stroke-linecap="round"/>
+</svg>

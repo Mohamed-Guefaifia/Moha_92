@@ -1,0 +1,85 @@
+{
+  "audio": "audio.mp3",
+  "scenes": [
+    {
+      "type": "image",
+      "src": "scenes/munafiqin/scene-01.svg",
+      "start": 0,
+      "end": 13.94
+    },
+    {
+      "type": "image",
+      "src": "scenes/munafiqin/scene-02.svg",
+      "start": 13.94,
+      "end": 24.1
+    },
+    {
+      "type": "image",
+      "src": "scenes/munafiqin/scene-03.svg",
+      "start": 24.1,
+      "end": 32.99
+    },
+    {
+      "type": "image",
+      "src": "scenes/munafiqin/scene-04.svg",
+      "start": 32.99,
+      "end": 43.2
+    },
+    {
+      "type": "quote",
+      "variant": "note",
+      "title": "قال النبي ﷺ:",
+      "segments": [
+        {
+          "text": "آية المنافق ثلاث:",
+          "highlight": true
+        },
+        {
+          "text": " إذا حدّث كذب، وإذا وعد أخلف، وإذا اؤتمن خان"
+        }
+      ],
+      "start": 43.2,
+      "end": 57.25
+    },
+    {
+      "type": "image",
+      "src": "scenes/munafiqin/scene-06.svg",
+      "start": 57.25,
+      "end": 65.03
+    },
+    {
+      "type": "quote",
+      "variant": "ornate",
+      "title": "سُورَةُ النِّسَاء",
+      "segments": [
+        {
+          "text": "وَإِذَا قَامُوا إِلَى الصَّلَاةِ قَامُوا كُسَالَىٰ",
+          "highlight": true
+        },
+        {
+          "text": " يُرَاءُونَ النَّاسَ وَلَا يَذْكُرُونَ اللَّهَ إِلَّا قَلِيلًا"
+        }
+      ],
+      "start": 65.03,
+      "end": 76.85
+    },
+    {
+      "type": "image",
+      "src": "scenes/munafiqin/scene-08.svg",
+      "start": 76.85,
+      "end": 87.25
+    },
+    {
+      "type": "image",
+      "src": "scenes/munafiqin/scene-09.svg",
+      "start": 87.25,
+      "end": 96.48
+    },
+    {
+      "type": "image",
+      "src": "scenes/munafiqin/scene-10.svg",
+      "start": 96.48,
+      "end": 107.38
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" fill="none">
+  <!-- Scene 6: lazy prayer — droopy eyes glancing sideways, hands folded, prayer mat -->
+  <!-- prayer mat -->
+  <g>
+    <rect x="380" y="560" width="420" height="70" rx="10" fill="#a8a8a8" stroke="#111111" stroke-width="6"/>
+    <path d="M400 595 Q590 570 780 595" stroke="#ffffff" stroke-width="6" fill="none"/>
+  </g>
+  <!-- head, tilted -->
+  <g transform="rotate(-7 590 180)">
+    <circle cx="590" cy="180" r="66" fill="#ffffff" stroke="#111111" stroke-width="8"/>
+    <!-- droopy eyebrows -->
+    <path d="M538 140 L582 148" stroke="#111111" stroke-width="7" stroke-linecap="round"/>
+    <path d="M604 148 L648 142" stroke="#111111" stroke-width="7" stroke-linecap="round"/>
+    <!-- half-closed eyes, pupils drifting sideways -->
+    <ellipse cx="568" cy="180" rx="17" ry="20" fill="#ffffff" stroke="#111111" stroke-width="6"/>
+    <ellipse cx="616" cy="178" rx="19" ry="22" fill="#ffffff" stroke="#111111" stroke-width="6"/>
+    <path d="M551 172 L585 172 M597 170 L635 170" stroke="#111111" stroke-width="6" stroke-linecap="round"/>
+    <circle cx="578" cy="184" r="7" fill="#111111"/>
+    <circle cx="627" cy="182" r="7.5" fill="#111111"/>
+    <!-- flat bored mouth -->
+    <path d="M568 224 L618 222" stroke="#111111" stroke-width="6" stroke-linecap="round"/>
+  </g>
+  <!-- body -->
+  <path d="M590 246 L590 430" stroke="#111111" stroke-width="16" stroke-linecap="round"/>
+  <!-- folded arms (prayer position, limp) -->
+  <path d="M590 290 Q520 320 555 345" stroke="#111111" stroke-width="13" stroke-linecap="round"/>
+  <path d="M590 292 Q656 324 618 347" stroke="#111111" stroke-width="13" stroke-linecap="round"/>
+  <circle cx="562" cy="348" r="12" fill="#111111"/>
+  <circle cx="612" cy="350" r="12" fill="#111111"/>
+  <!-- legs straight -->
+  <path d="M590 430 Q576 500 566 566" stroke="#111111" stroke-width="14" stroke-linecap="round"/>
+  <path d="M590 430 Q606 500 616 566" stroke="#111111" stroke-width="14" stroke-linecap="round"/>
+  <path d="M566 568 L526 572" stroke="#111111" stroke-width="13" stroke-linecap="round"/>
+  <path d="M616 568 L658 572" stroke="#111111" stroke-width="13" stroke-linecap="round"/>
+  <!-- yawn / tired marks -->
+  <path d="M700 110 L724 86 M712 122 L744 100" stroke="#9a9a9a" stroke-width="8" stroke-linecap="round"/>
+  <!-- clock showing time slipping -->
+  <g stroke="#111111" stroke-width="6">
+    <circle cx="920" cy="160" r="70" fill="#ffffff"/>
+    <path d="M920 160 L920 112" stroke-width="8" stroke-linecap="round"/>
+    <path d="M920 160 L958 178" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="920" cy="160" r="6" fill="#111111"/>
+  </g>
+</svg>

@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" fill="none">
+  <!-- Scene 8: self-accounting — pointing at a checklist board, thinking -->
+  <ellipse cx="760" cy="600" rx="170" ry="16" fill="#c9c9c9" opacity="0.6"/>
+  <!-- checklist board on a stand -->
+  <g stroke="#111111" stroke-width="7">
+    <rect x="140" y="90" width="400" height="380" rx="16" fill="#ffffff"/>
+    <path d="M240 470 L200 580 M440 470 L480 580" stroke-linecap="round"/>
+    <!-- row 1: checked -->
+    <rect x="180" y="140" width="52" height="52" rx="10" fill="#ffffff"/>
+    <path d="M190 168 L204 182 L226 148" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M260 166 L500 166" stroke="#a8a8a8" stroke-width="11" stroke-linecap="round"/>
+    <!-- row 2: checked -->
+    <rect x="180" y="250" width="52" height="52" rx="10" fill="#ffffff"/>
+    <path d="M190 278 L204 292 L226 258" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M260 276 L470 276" stroke="#a8a8a8" stroke-width="11" stroke-linecap="round"/>
+    <!-- row 3: empty -->
+    <rect x="180" y="360" width="52" height="52" rx="10" fill="#ffffff"/>
+    <path d="M260 386 L510 386" stroke="#a8a8a8" stroke-width="11" stroke-linecap="round"/>
+  </g>
+  <!-- character (right), pointing at the board, thoughtful -->
+  <circle cx="800" cy="190" r="66" fill="#ffffff" stroke="#111111" stroke-width="8"/>
+  <path d="M748 144 Q766 132 786 138" stroke="#111111" stroke-width="7" stroke-linecap="round"/>
+  <path d="M812 136 L858 142" stroke="#111111" stroke-width="7" stroke-linecap="round"/>
+  <ellipse cx="778" cy="186" rx="17" ry="22" fill="#ffffff" stroke="#111111" stroke-width="6"/>
+  <ellipse cx="826" cy="184" rx="19" ry="24" fill="#ffffff" stroke="#111111" stroke-width="6"/>
+  <circle cx="772" cy="190" r="7" fill="#111111"/>
+  <circle cx="820" cy="188" r="7.5" fill="#111111"/>
+  <path d="M782 230 Q806 240 830 226" stroke="#111111" stroke-width="6" stroke-linecap="round"/>
+  <path d="M800 256 L800 428" stroke="#111111" stroke-width="16" stroke-linecap="round"/>
+  <!-- pointing arm towards the board -->
+  <path d="M800 295 Q700 280 620 250" stroke="#111111" stroke-width="13" stroke-linecap="round"/>
+  <circle cx="612" cy="247" r="12" fill="#111111"/>
+  <!-- other hand on the chin -->
+  <path d="M800 300 Q876 300 842 240" stroke="#111111" stroke-width="13" stroke-linecap="round"/>
+  <circle cx="838" cy="234" r="12" fill="#111111"/>
+  <!-- legs -->
+  <path d="M800 428 Q778 504 758 570" stroke="#111111" stroke-width="14" stroke-linecap="round"/>
+  <path d="M800 428 Q826 504 848 570" stroke="#111111" stroke-width="14" stroke-linecap="round"/>
+  <path d="M758 572 L716 576" stroke="#111111" stroke-width="13" stroke-linecap="round"/>
+  <path d="M848 572 L891 576" stroke="#111111" stroke-width="13" stroke-linecap="round"/>
+</svg>

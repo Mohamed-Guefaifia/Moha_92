@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" fill="none">
+  <!-- Scene 2: the liar — sly smile, talking, fingers crossed behind the back -->
+  <ellipse cx="430" cy="600" rx="170" ry="16" fill="#c9c9c9" opacity="0.6"/>
+  <!-- head -->
+  <circle cx="430" cy="180" r="66" fill="#ffffff" stroke="#111111" stroke-width="8"/>
+  <!-- sly eyebrows -->
+  <path d="M378 132 L424 142" stroke="#111111" stroke-width="7" stroke-linecap="round"/>
+  <path d="M444 140 L490 128" stroke="#111111" stroke-width="7" stroke-linecap="round"/>
+  <!-- eyes -->
+  <ellipse cx="408" cy="176" rx="17" ry="22" fill="#ffffff" stroke="#111111" stroke-width="6"/>
+  <ellipse cx="456" cy="174" rx="19" ry="24" fill="#ffffff" stroke="#111111" stroke-width="6"/>
+  <circle cx="414" cy="178" r="7" fill="#111111"/>
+  <circle cx="462" cy="176" r="7.5" fill="#111111"/>
+  <!-- smirk -->
+  <path d="M408 220 Q436 236 466 214" stroke="#111111" stroke-width="7" stroke-linecap="round"/>
+  <!-- body -->
+  <path d="M430 246 L430 420" stroke="#111111" stroke-width="16" stroke-linecap="round"/>
+  <!-- right arm: gesturing towards the speech bubble -->
+  <path d="M430 285 Q520 270 580 225" stroke="#111111" stroke-width="13" stroke-linecap="round"/>
+  <circle cx="588" cy="220" r="12" fill="#111111"/>
+  <!-- left arm: bent behind the back, crossed fingers -->
+  <path d="M430 290 Q350 320 355 385" stroke="#111111" stroke-width="13" stroke-linecap="round"/>
+  <path d="M348 392 L332 418" stroke="#111111" stroke-width="9" stroke-linecap="round"/>
+  <path d="M362 394 L336 412" stroke="#111111" stroke-width="9" stroke-linecap="round"/>
+  <!-- legs -->
+  <path d="M430 420 Q408 500 388 570" stroke="#111111" stroke-width="14" stroke-linecap="round"/>
+  <path d="M430 420 Q456 500 478 570" stroke="#111111" stroke-width="14" stroke-linecap="round"/>
+  <path d="M388 572 L346 576" stroke="#111111" stroke-width="13" stroke-linecap="round"/>
+  <path d="M478 572 L521 576" stroke="#111111" stroke-width="13" stroke-linecap="round"/>
+  <!-- speech bubble with empty squiggles (pretty words) -->
+  <rect x="640" y="90" width="330" height="150" rx="28" fill="#ffffff" stroke="#111111" stroke-width="8"/>
+  <path d="M672 240 L640 292 L724 244" fill="#ffffff" stroke="#111111" stroke-width="8" stroke-linejoin="round"/>
+  <path d="M685 135 L905 135" stroke="#a8a8a8" stroke-width="10" stroke-linecap="round"/>
+  <path d="M685 168 L925 168" stroke="#a8a8a8" stroke-width="10" stroke-linecap="round"/>
+  <path d="M685 201 L855 201" stroke="#a8a8a8" stroke-width="10" stroke-linecap="round"/>
+</svg>
