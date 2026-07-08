@@ -8,6 +8,9 @@ proportionally to word length.
 
 Usage: python3 scripts/tts_google.py content/my-video.json
 
+Env: TTS_PITCH_SEMITONES=-4  lowers the pitch (male voice) via rubberband,
+duration is preserved so all word timings stay exact.
+
 Input JSON: {"lang": "ar", "scenes": [{"id": "scene-01", "clauses": ["...", "..."]}]}
 Outputs:
   public/audio.mp3        — full narration
@@ -111,9 +114,14 @@ with open(concat_list, "w") as f:
         else:
             f.write(f"file '{os.path.abspath(val)}'\n")
 
+pitch_semitones = float(os.environ.get("TTS_PITCH_SEMITONES", "0"))
+audio_filters = []
+if pitch_semitones:
+    ratio = 2 ** (pitch_semitones / 12)
+    audio_filters += ["-af", f"rubberband=pitch={ratio:.6f}"]
 subprocess.run(
     ["ffmpeg", "-y", "-v", "error", "-f", "concat", "-safe", "0",
-     "-i", concat_list, "-c:a", "libmp3lame", "-b:a", "128k",
+     "-i", concat_list, *audio_filters, "-c:a", "libmp3lame", "-b:a", "128k",
      "-ar", "24000", "public/audio.mp3"], check=True)
 
 with open("src/data/words.json", "w", encoding="utf-8") as f:

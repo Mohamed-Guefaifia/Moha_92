@@ -38,7 +38,7 @@ export const WordCaptions = ({words, portrait}) => {
   const {fps, width} = useVideoConfig();
   const t = frame / fps;
 
-  const maxWords = 5; // same paging in both formats (approved template)
+  const maxWords = 6; // bigger accumulating pages, like the reference video
   const pages = useMemo(() => paginate(words, maxWords), [words, maxWords]);
 
   const page = pages.find((p, i) => {
@@ -53,7 +53,7 @@ export const WordCaptions = ({words, portrait}) => {
 
   if (!page) return null;
 
-  const fontSize = portrait ? width * 0.064 : width * 0.052;
+  const fontSize = portrait ? width * 0.072 : width * 0.06;
 
   return (
     <AbsoluteFill
@@ -87,18 +87,20 @@ export const WordCaptions = ({words, portrait}) => {
           if (t < word.start) return null;
           const progress = interpolate(
             t,
-            [word.start, word.start + 0.25],
+            [word.start, word.start + 0.28],
             [0, 1],
             {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}
           );
           const grey = Math.round(interpolate(progress, [0, 1], [176, 17]));
-          const rise = interpolate(progress, [0, 1], [0.12, 0]);
+          const rise = interpolate(progress, [0, 1], [0.14, 0]);
+          // pop-in with a slight overshoot, like the word is stamped on
+          const pop = interpolate(progress, [0, 0.55, 1], [0.6, 1.1, 1]);
           return (
             <span
               key={`${i}-${word.start}`}
               style={{
                 color: `rgb(${grey}, ${grey}, ${grey})`,
-                transform: `translateY(${rise}em)`,
+                transform: `translateY(${rise}em) scale(${pop})`,
                 textShadow: '0 2px 3px rgba(0,0,0,0.06)',
               }}
             >

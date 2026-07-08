@@ -49,6 +49,7 @@ export const StickmanVideo = ({data, words}) => {
                 src={scene.src}
                 durationInFrames={durationInFrames}
                 portrait={portrait}
+                index={i}
               />
             )}
           </Sequence>

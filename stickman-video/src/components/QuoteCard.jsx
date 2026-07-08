@@ -59,12 +59,14 @@ export const QuoteCard = ({
   const enter = spring({
     frame,
     fps,
-    config: {damping: 200},
-    durationInFrames: Math.round(fps * 0.5),
+    config: {damping: 15, stiffness: 110},
+    durationInFrames: Math.round(fps * 0.6),
   });
   const opacity = interpolate(frame, [0, fps * 0.25], [0, 1], {
     extrapolateRight: 'clamp',
   });
+  // gentle floating so the card never feels frozen
+  const float = Math.sin((frame / fps) * 1.15) * 7;
 
   const base = width / (portrait ? 22 : 36); // responsive type scale
 
@@ -76,7 +78,7 @@ export const QuoteCard = ({
           justifyContent: 'center',
           padding: '6%',
           opacity,
-          transform: `scale(${0.96 + enter * 0.04})`,
+          transform: `translateY(${float}px) scale(${0.94 + enter * 0.06})`,
         }}
       >
         <div
@@ -119,7 +121,7 @@ export const QuoteCard = ({
         justifyContent: 'center',
         padding: '6%',
         opacity,
-        transform: `scale(${0.96 + enter * 0.04})`,
+        transform: `translateY(${float}px) scale(${0.94 + enter * 0.06})`,
       }}
     >
       {title ? (
