@@ -49,6 +49,27 @@ npm run video:render        # rend out/video.mp4  (1920×1080, YouTube)
 npm run video:render:short  # rend out/short.mp4  (1080×1920, Shorts/Reels)
 ```
 
+## 🕌 Vidéo « Asma'ul Husna » — Les 99 Noms d'Allah (≥ 5 minutes)
+
+Deux compositions dédiées affichent les 99 noms un par un : basmala en intro,
+puis pour chaque nom sa **calligraphie arabe** (police Amiri embarquée), sa
+**translittération** et sa **signification en français**, avec numéro (1/99),
+barre de progression et outro (Coran 7:180).
+
+```bash
+npm run asma:render          # out/asma-ul-husna.mp4        (1920×1080)
+npm run asma:render:short    # out/asma-ul-husna-short.mp4  (1080×1920)
+```
+
+**Durée** : sans audio, la vidéo dure ≈ **5 min 30** (3,2 s par nom). Si vous
+déposez une récitation/nasheed dans `public/asma-audio.mp3`, la vidéo prend
+exactement la durée de l'audio et les 99 noms se répartissent uniformément
+dessus. Pour ajuster le rythme sans audio, changez
+`ASMA_MS_PER_NAME_FALLBACK` dans `remotion/asma/AsmaVideo.tsx`.
+
+Les textes (translittérations, significations) s'éditent dans
+`remotion/asma/names.ts`.
+
 ## 🎨 Personnaliser « notre style »
 
 | Fichier | Rôle |
