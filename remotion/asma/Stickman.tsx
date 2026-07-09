@@ -1,15 +1,22 @@
 import React from "react";
+import { random, useCurrentFrame } from "remotion";
 import { theme } from "../theme";
 
 /**
  * Le personnage : stickman cartoon au trait noir sur fond blanc,
  * d'après le dessin de référence — grosse tête ronde blanche cerclée
  * de noir, sourcils expressifs, yeux avec pupilles, bouche ouverte
- * quand il parle, poings/doigt pointé, pieds dessinés et ombre au sol.
+ * quand il parle, poings/doigt pointé/paumes ouvertes selon la pose,
+ * pieds dessinés et ombre au sol.
  *
- * Chaque membre est une polyline dont les points glissent de la pose
- * neutre vers la pose cible (piloté par `enter`, un spring), ce qui
- * anime le geste. `talk` > 0 ouvre/ferme la bouche.
+ * Style « animation dessinée à la main » :
+ * - les membres s'affinent vers les extrémités (trait fuselé) ;
+ * - le trait tremble très légèrement toutes les ~4 images (boiling),
+ *   comme dans les animations stickman dessinées image par image ;
+ * - il cligne des yeux, respire, et entre avec un squash & stretch.
+ *
+ * Chaque membre glisse de la pose neutre vers la pose cible (piloté
+ * par `enter`, un spring). `talk` > 0 ouvre/ferme la bouche.
  */
 
 type Pt = [number, number];
@@ -172,11 +179,38 @@ const lerpLimb = (a: Limb, b: Limb, t: number): Limb => [
   lerpPt(a[1], b[1], t),
   lerpPt(a[2], b[2], t),
 ];
-const limbPoints = (l: Limb) => l.map((p) => p.join(",")).join(" ");
 
 const INK = "#0d0d0d";
 const PAPER = "#ffffff";
-const LINE = 8;
+
+/** Quadrilatère d'un segment de membre fuselé (largeur wa → wb) */
+const segPoly = (a: Pt, b: Pt, wa: number, wb: number) => {
+  const dx = b[0] - a[0];
+  const dy = b[1] - a[1];
+  const len = Math.hypot(dx, dy) || 1;
+  const nx = -dy / len;
+  const ny = dx / len;
+  return [
+    `${a[0] + (nx * wa) / 2},${a[1] + (ny * wa) / 2}`,
+    `${b[0] + (nx * wb) / 2},${b[1] + (ny * wb) / 2}`,
+    `${b[0] - (nx * wb) / 2},${b[1] - (ny * wb) / 2}`,
+    `${a[0] - (nx * wa) / 2},${a[1] - (ny * wa) / 2}`,
+  ].join(" ");
+};
+
+/** Membre au trait fuselé : épais à l'épaule/hanche, fin au bout */
+const TaperedLimb: React.FC<{ pts: Limb; widths: [number, number, number] }> = ({
+  pts,
+  widths,
+}) => (
+  <g>
+    <polygon points={segPoly(pts[0], pts[1], widths[0], widths[1])} fill={INK} />
+    <polygon points={segPoly(pts[1], pts[2], widths[1], widths[2])} fill={INK} />
+    {pts.map((p, i) => (
+      <circle key={i} cx={p[0]} cy={p[1]} r={widths[i] / 2} fill={INK} />
+    ))}
+  </g>
+);
 
 /** Main au bout d'un bras : poing, doigt pointé ou paume ouverte */
 const HandShape: React.FC<{ limb: Limb; kind: Hand }> = ({ limb, kind }) => {
@@ -230,12 +264,12 @@ const HandShape: React.FC<{ limb: Limb; kind: Hand }> = ({ limb, kind }) => {
   return <circle cx={hand[0]} cy={hand[1]} r={6.5} fill={PAPER} stroke={INK} strokeWidth={5} />;
 };
 
-/** Visage expressif : sourcils, yeux avec pupilles, bouche */
-const Face: React.FC<{ expression: Expression; talk: number }> = ({
+/** Visage expressif : sourcils, yeux avec pupilles, bouche, clignement */
+const Face: React.FC<{ expression: Expression; talk: number; blink: boolean }> = ({
   expression,
   talk,
+  blink,
 }) => {
-  // Yeux : deux ellipses blanches cerclées de noir, pupilles vers le texte
   const eyeL: Pt = [90, 42];
   const eyeR: Pt = [108, 42];
   const pupilShift = 3;
@@ -273,21 +307,25 @@ const Face: React.FC<{ expression: Expression; talk: number }> = ({
     }
   })();
 
-  const eyes =
-    expression === "wink" ? (
-      <>
-        <ellipse cx={eyeL[0]} cy={eyeL[1]} rx={6.5} ry={8} fill={PAPER} stroke={INK} strokeWidth={3} />
-        <circle cx={eyeL[0] + pupilShift} cy={eyeL[1]} r={2.8} fill={INK} />
-        <line x1={102} y1={42} x2={114} y2={42} stroke={INK} strokeWidth={4} strokeLinecap="round" />
-      </>
-    ) : (
-      <>
-        <ellipse cx={eyeL[0]} cy={eyeL[1]} rx={6.5} ry={expression === "surprised" ? 9.5 : 8} fill={PAPER} stroke={INK} strokeWidth={3} />
-        <ellipse cx={eyeR[0]} cy={eyeR[1]} rx={6.5} ry={expression === "surprised" ? 9.5 : 8} fill={PAPER} stroke={INK} strokeWidth={3} />
-        <circle cx={eyeL[0] + pupilShift} cy={eyeL[1]} r={2.8} fill={INK} />
-        <circle cx={eyeR[0] + pupilShift} cy={eyeR[1]} r={2.8} fill={INK} />
-      </>
-    );
+  const eyes = blink ? (
+    <>
+      <line x1={84} y1={42} x2={96} y2={42} stroke={INK} strokeWidth={4} strokeLinecap="round" />
+      <line x1={102} y1={42} x2={114} y2={42} stroke={INK} strokeWidth={4} strokeLinecap="round" />
+    </>
+  ) : expression === "wink" ? (
+    <>
+      <ellipse cx={eyeL[0]} cy={eyeL[1]} rx={6.5} ry={8} fill={PAPER} stroke={INK} strokeWidth={3} />
+      <circle cx={eyeL[0] + pupilShift} cy={eyeL[1]} r={2.8} fill={INK} />
+      <line x1={102} y1={42} x2={114} y2={42} stroke={INK} strokeWidth={4} strokeLinecap="round" />
+    </>
+  ) : (
+    <>
+      <ellipse cx={eyeL[0]} cy={eyeL[1]} rx={6.5} ry={expression === "surprised" ? 9.5 : 8} fill={PAPER} stroke={INK} strokeWidth={3} />
+      <ellipse cx={eyeR[0]} cy={eyeR[1]} rx={6.5} ry={expression === "surprised" ? 9.5 : 8} fill={PAPER} stroke={INK} strokeWidth={3} />
+      <circle cx={eyeL[0] + pupilShift} cy={eyeL[1]} r={2.8} fill={INK} />
+      <circle cx={eyeR[0] + pupilShift} cy={eyeR[1]} r={2.8} fill={INK} />
+    </>
+  );
 
   // Bouche : ouverte et animée quand il parle (intérieur noir, comme
   // le dessin), sinon selon l'expression, décalée sur le côté
@@ -381,6 +419,8 @@ export const Stickman: React.FC<{
   bubbleText?: string | null;
   /** Opacité/échelle de la bulle (0 à 1) */
   bubbleIn?: number;
+  /** Graine de variation (boiling, clignement) — ex. l'index du nom */
+  seed?: number;
   width: number;
 }> = ({
   pose,
@@ -391,17 +431,35 @@ export const Stickman: React.FC<{
   flip = false,
   bubbleText = null,
   bubbleIn = 0,
+  seed = 0,
   width,
 }) => {
+  const frame = useCurrentFrame();
   const t = Math.min(1, Math.max(0, enter));
-  const armL = lerpLimb(NEUTRAL.armL, pose.armL, t);
-  const armR = lerpLimb(NEUTRAL.armR, pose.armR, t);
-  const legL = lerpLimb(NEUTRAL.legL, pose.legL, t);
-  const legR = lerpLimb(NEUTRAL.legR, pose.legR, t);
-  const lean = lerp(NEUTRAL.lean ?? 0, pose.lean ?? 0, t);
-  const headTilt = lerp(NEUTRAL.headTilt ?? 0, pose.headTilt ?? 0, t);
+
+  // Boiling : le trait est « redessiné » toutes les 4 images, avec de
+  // minuscules décalages déterministes — l'effet dessin à la main
+  const bucket = Math.floor(frame / 4);
+  const wob = (key: string, amp = 1.7) =>
+    (random(`${seed}:${bucket}:${key}`) - 0.5) * 2 * amp;
+  const wobble = (l: Limb, id: string): Limb =>
+    l.map((p, i) => [p[0] + wob(`${id}${i}x`), p[1] + wob(`${id}${i}y`)]) as Limb;
+
+  const armL = wobble(lerpLimb(NEUTRAL.armL, pose.armL, t), "aL");
+  const armR = wobble(lerpLimb(NEUTRAL.armR, pose.armR, t), "aR");
+  const legL = wobble(lerpLimb(NEUTRAL.legL, pose.legL, t), "lL");
+  const legR = wobble(lerpLimb(NEUTRAL.legR, pose.legR, t), "lR");
+  const lean = lerp(NEUTRAL.lean ?? 0, pose.lean ?? 0, t) + wob("lean", 0.6);
+  const headTilt = lerp(NEUTRAL.headTilt ?? 0, pose.headTilt ?? 0, t) + wob("tilt", 0.8);
   const handL: Hand = t > 0.4 ? pose.handL ?? "fist" : "fist";
   const handR: Hand = t > 0.4 ? pose.handR ?? "fist" : "fist";
+
+  // Clignement des yeux (jamais pendant qu'il parle)
+  const blink = talk < 0.05 && (frame + seed * 17) % 96 < 5;
+
+  // Squash & stretch à l'entrée + respiration, pieds ancrés au sol
+  const sy =
+    (0.82 + 0.18 * Math.min(1.15, enter)) + 0.012 * Math.sin(frame / 11) * t;
 
   return (
     <div style={{ position: "relative", width, lineHeight: 0 }}>
@@ -411,7 +469,7 @@ export const Stickman: React.FC<{
             position: "absolute",
             top: -Math.round(width * 0.14),
             [flip ? "right" : "left"]: "74%",
-            transform: `scale(${bubbleIn})`,
+            transform: `scale(${bubbleIn}) rotate(${wob("bub", 1.2)}deg)`,
             transformOrigin: flip ? "bottom right" : "bottom left",
             opacity: bubbleIn,
             background: PAPER,
@@ -446,37 +504,42 @@ export const Stickman: React.FC<{
         viewBox="0 -25 200 305"
         style={{ width: "100%", transform: flip ? "scaleX(-1)" : undefined }}
       >
-        {/* ombre au sol */}
-        <ellipse cx={100} cy={262} rx={52} ry={8} fill="rgba(0,0,0,0.15)" />
+        {/* ombre au sol (hors squash, elle reste posée par terre) */}
+        <ellipse cx={100} cy={262} rx={52 + wob("sh", 2)} ry={8} fill="rgba(0,0,0,0.15)" />
 
-        <g transform={`rotate(${lean} 100 165)`}>
-          {/* jambes, tronc, bras */}
-          <polyline points={limbPoints(legL)} fill="none" stroke={INK} strokeWidth={LINE} strokeLinecap="round" strokeLinejoin="round" />
-          <polyline points={limbPoints(legR)} fill="none" stroke={INK} strokeWidth={LINE} strokeLinecap="round" strokeLinejoin="round" />
-          {/* pieds */}
-          <ellipse cx={legL[2][0] - 5} cy={legL[2][1] + 2} rx={10} ry={5} fill={PAPER} stroke={INK} strokeWidth={4} />
-          <ellipse cx={legR[2][0] + 5} cy={legR[2][1] + 2} rx={10} ry={5} fill={PAPER} stroke={INK} strokeWidth={4} />
-          <line x1={100} y1={80} x2={100} y2={165} stroke={INK} strokeWidth={LINE} strokeLinecap="round" />
-          <polyline points={limbPoints(armL)} fill="none" stroke={INK} strokeWidth={LINE} strokeLinecap="round" strokeLinejoin="round" />
-          <polyline points={limbPoints(armR)} fill="none" stroke={INK} strokeWidth={LINE} strokeLinecap="round" strokeLinejoin="round" />
-          <HandShape limb={armL} kind={handL} />
-          <HandShape limb={armR} kind={handR} />
+        <g transform={`translate(0 ${262 * (1 - sy)}) scale(1 ${sy})`}>
+          <g transform={`rotate(${lean} 100 165)`}>
+            {/* jambes et pieds */}
+            <TaperedLimb pts={legL} widths={[10, 8, 5.5]} />
+            <TaperedLimb pts={legR} widths={[10, 8, 5.5]} />
+            <ellipse cx={legL[2][0] - 5} cy={legL[2][1] + 2} rx={10} ry={5} fill={PAPER} stroke={INK} strokeWidth={4} />
+            <ellipse cx={legR[2][0] + 5} cy={legR[2][1] + 2} rx={10} ry={5} fill={PAPER} stroke={INK} strokeWidth={4} />
+            {/* tronc légèrement fuselé */}
+            <polygon points={segPoly([100 + wob("b1"), 80], [100 + wob("b2"), 165], 8.5, 10)} fill={INK} />
+            <circle cx={100 + wob("b1")} cy={80} r={4.2} fill={INK} />
+            <circle cx={100 + wob("b2")} cy={165} r={5} fill={INK} />
+            {/* bras et mains */}
+            <TaperedLimb pts={armL} widths={[9.5, 7.5, 5]} />
+            <TaperedLimb pts={armR} widths={[9.5, 7.5, 5]} />
+            <HandShape limb={armL} kind={handL} />
+            <HandShape limb={armR} kind={handR} />
 
-          {/* grosse tête ronde blanche cerclée de noir */}
-          <g transform={`rotate(${headTilt} 100 48)`}>
-            <circle cx={100} cy={48} r={34} fill={PAPER} stroke={INK} strokeWidth={6} />
-            <Face expression={expression} talk={talk} />
-            {outfit.glasses ? (
-              <>
-                <circle cx={90} cy={42} r={10.5} fill="none" stroke={INK} strokeWidth={3} />
-                <circle cx={108} cy={42} r={10.5} fill="none" stroke={INK} strokeWidth={3} />
-                <line x1={100} y1={42} x2={98} y2={42} stroke={INK} strokeWidth={3} />
-              </>
-            ) : null}
-            {outfit.hat ? <Hat hat={outfit.hat} /> : null}
+            {/* grosse tête ronde blanche cerclée de noir */}
+            <g transform={`rotate(${headTilt} 100 48) translate(${wob("hx", 1.1)} ${wob("hy", 1.1)})`}>
+              <circle cx={100} cy={48} r={34} fill={PAPER} stroke={INK} strokeWidth={6} />
+              <Face expression={expression} talk={talk} blink={blink} />
+              {outfit.glasses ? (
+                <>
+                  <circle cx={90} cy={42} r={10.5} fill="none" stroke={INK} strokeWidth={3} />
+                  <circle cx={108} cy={42} r={10.5} fill="none" stroke={INK} strokeWidth={3} />
+                  <line x1={100} y1={42} x2={98} y2={42} stroke={INK} strokeWidth={3} />
+                </>
+              ) : null}
+              {outfit.hat ? <Hat hat={outfit.hat} /> : null}
+            </g>
+
+            {outfit.neck ? <Neckwear neck={outfit.neck} /> : null}
           </g>
-
-          {outfit.neck ? <Neckwear neck={outfit.neck} /> : null}
         </g>
       </svg>
     </div>

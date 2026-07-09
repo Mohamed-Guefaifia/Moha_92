@@ -169,6 +169,47 @@ const AsmaIntro: React.FC<{ orientation: "landscape" | "portrait" }> = ({
   );
 };
 
+/** Traits d'impact dessinés à la main autour du nom quand il surgit */
+const PopBurst: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) => {
+  const a = Math.min(1, Math.max(0, (frame - fps * 0.38) / (fps * 0.45)));
+  if (a <= 0.01 || a >= 0.99) {
+    return null;
+  }
+  const angles = [20, 65, 115, 160, 205, 250, 295, 340];
+  return (
+    <svg
+      viewBox="-100 -100 200 200"
+      style={{
+        position: "absolute",
+        inset: "-15%",
+        width: "130%",
+        height: "130%",
+        overflow: "visible",
+        pointerEvents: "none",
+      }}
+    >
+      {angles.map((deg) => {
+        const rad = (deg * Math.PI) / 180;
+        const r0 = 60 + 50 * a;
+        const r1 = r0 + 18 * (1 - a);
+        return (
+          <line
+            key={deg}
+            x1={Math.cos(rad) * r0}
+            y1={Math.sin(rad) * r0 * 0.75}
+            x2={Math.cos(rad) * r1}
+            y2={Math.sin(rad) * r1 * 0.75}
+            stroke={INK}
+            strokeWidth={5}
+            strokeLinecap="round"
+            opacity={1 - a}
+          />
+        );
+      })}
+    </svg>
+  );
+};
+
 /** Carte d'un nom : le stickman le présente, le nom apparaît quand il « parle » */
 const NameCard: React.FC<{
   name: DivineName;
@@ -203,8 +244,11 @@ const NameCard: React.FC<{
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" },
   );
 
-  // Petit balancement pendant qu'il présente
+  // Petit balancement pendant qu'il présente, et bond de réaction
+  // pile quand le nom surgit
   const bob = Math.sin(frame / 9) * 4 * enter;
+  const hopT = Math.min(1, Math.max(0, (frame - fps * 0.35) / (fps * 0.4)));
+  const hop = -18 * Math.sin(Math.PI * hopT);
 
   const arabicSize = Math.round(width * (isPortrait ? 0.15 : 0.08));
   const isLongName = name.arabic.length > 12;
@@ -212,7 +256,7 @@ const NameCard: React.FC<{
   const onLeft = cast.side === "left";
 
   const stickman = (
-    <div style={{ transform: `translateY(${bob}px)` }}>
+    <div style={{ transform: `translateY(${bob + hop}px)` }}>
       <Stickman
         pose={cast.pose}
         expression={cast.expression}
@@ -222,6 +266,7 @@ const NameCard: React.FC<{
         flip={!onLeft}
         bubbleText={`${index + 1} / 99`}
         bubbleIn={enter}
+        seed={index}
         width={stickWidth}
       />
     </div>
@@ -238,19 +283,22 @@ const NameCard: React.FC<{
         minWidth: 0,
       }}
     >
-      <div
-        style={{
-          fontFamily: arabicFont,
-          fontWeight: 700,
-          fontSize: isLongName ? Math.round(arabicSize * 0.62) : arabicSize,
-          lineHeight: 1.7,
-          color: INK,
-          direction: "rtl",
-          textAlign: "center",
-          ...nameAnimStyle(cast.anim, reveal, cast.side),
-        }}
-      >
-        {name.arabic}
+      <div style={{ position: "relative" }}>
+        <PopBurst frame={frame} fps={fps} />
+        <div
+          style={{
+            fontFamily: arabicFont,
+            fontWeight: 700,
+            fontSize: isLongName ? Math.round(arabicSize * 0.62) : arabicSize,
+            lineHeight: 1.7,
+            color: INK,
+            direction: "rtl",
+            textAlign: "center",
+            ...nameAnimStyle(cast.anim, reveal, cast.side),
+          }}
+        >
+          {name.arabic}
+        </div>
       </div>
       <div
         style={{
