@@ -2,8 +2,9 @@ import React from "react";
 import { AbsoluteFill, interpolate, useCurrentFrame } from "remotion";
 
 /**
- * Fond strictement noir et blanc : noir profond, deux halos gris très
- * doux qui dérivent lentement, et un léger vignettage.
+ * Fond « papier » strictement noir et blanc, assorti au personnage
+ * dessiné au trait : blanc, deux très légères ombres grises qui
+ * dérivent lentement, et un vignettage discret.
  */
 export const MonoBackground: React.FC = () => {
   const frame = useCurrentFrame();
@@ -11,7 +12,7 @@ export const MonoBackground: React.FC = () => {
   const drift2 = interpolate(frame % 1100, [0, 550, 1100], [0, -70, 0]);
 
   return (
-    <AbsoluteFill style={{ background: "#000" }}>
+    <AbsoluteFill style={{ background: "#ffffff" }}>
       <div
         style={{
           position: "absolute",
@@ -21,7 +22,7 @@ export const MonoBackground: React.FC = () => {
           height: "45%",
           borderRadius: "50%",
           background:
-            "radial-gradient(circle, rgba(255,255,255,0.07) 0%, transparent 65%)",
+            "radial-gradient(circle, rgba(0,0,0,0.04) 0%, transparent 65%)",
         }}
       />
       <div
@@ -33,13 +34,13 @@ export const MonoBackground: React.FC = () => {
           height: "50%",
           borderRadius: "50%",
           background:
-            "radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 65%)",
+            "radial-gradient(circle, rgba(0,0,0,0.03) 0%, transparent 65%)",
         }}
       />
       <AbsoluteFill
         style={{
           background:
-            "radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.7) 100%)",
+            "radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,0.08) 100%)",
         }}
       />
     </AbsoluteFill>

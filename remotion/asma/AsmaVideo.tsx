@@ -24,9 +24,10 @@ export const ASMA_OUTRO_MS = 8000;
 /** Durée par nom quand il n'y a pas d'audio (≈ 5 min 30 au total) */
 export const ASMA_MS_PER_NAME_FALLBACK = 3200;
 
-/* Palette strictement noir et blanc */
-const WHITE = "#ffffff";
-const GREY = "#b3b3b3";
+/* Palette strictement noir et blanc : encre noire sur fond blanc,
+   comme le personnage dessiné au trait */
+const INK = "#0d0d0d";
+const GREY = "#5a5a5a";
 
 const arabicFont = "'Amiri', 'Noto Naskh Arabic', 'Traditional Arabic', serif";
 
@@ -116,7 +117,7 @@ const AsmaIntro: React.FC<{ orientation: "landscape" | "portrait" }> = ({
           fontFamily: arabicFont,
           fontWeight: 700,
           fontSize: Math.round(width * (isPortrait ? 0.06 : 0.04)),
-          color: WHITE,
+          color: INK,
           opacity: enter,
           transform: `translateY(${interpolate(enter, [0, 1], [50, 0])}px)`,
           direction: "rtl",
@@ -130,7 +131,7 @@ const AsmaIntro: React.FC<{ orientation: "landscape" | "portrait" }> = ({
           fontFamily: theme.fonts.heading,
           fontWeight: 800,
           fontSize: Math.round(width * (isPortrait ? 0.055 : 0.03)),
-          color: WHITE,
+          color: INK,
           marginTop: 36,
           opacity: titleEnter,
           transform: `translateY(${interpolate(titleEnter, [0, 1], [40, 0])}px)`,
@@ -243,8 +244,7 @@ const NameCard: React.FC<{
           fontWeight: 700,
           fontSize: isLongName ? Math.round(arabicSize * 0.62) : arabicSize,
           lineHeight: 1.7,
-          color: WHITE,
-          textShadow: "0 0 70px rgba(255,255,255,0.35)",
+          color: INK,
           direction: "rtl",
           textAlign: "center",
           ...nameAnimStyle(cast.anim, reveal, cast.side),
@@ -257,7 +257,7 @@ const NameCard: React.FC<{
           fontFamily: theme.fonts.heading,
           fontWeight: 800,
           fontSize: Math.round(width * (isPortrait ? 0.055 : 0.028)),
-          color: WHITE,
+          color: INK,
           marginTop: isPortrait ? 40 : 24,
           opacity: subReveal,
           transform: `translateY(${interpolate(subReveal, [0, 1], [30, 0])}px)`,
@@ -368,8 +368,7 @@ const AsmaOutro: React.FC<{ orientation: "landscape" | "portrait" }> = ({
           fontFamily: arabicFont,
           fontWeight: 700,
           fontSize: Math.round(width * (isPortrait ? 0.14 : 0.08)),
-          color: WHITE,
-          textShadow: "0 0 80px rgba(255,255,255,0.35)",
+          color: INK,
           opacity: enter,
           transform: `scale(${interpolate(enter, [0, 1], [0.85, 1])})`,
           direction: "rtl",
@@ -432,7 +431,7 @@ export const AsmaVideo: React.FC<
   const progress = Math.min(1, Math.max(0, (frame - introFrames) / namesTotalFrames));
 
   return (
-    <AbsoluteFill style={{ backgroundColor: "#000" }}>
+    <AbsoluteFill style={{ backgroundColor: "#fff" }}>
       <MonoBackground />
 
       {audioSrc ? <Audio src={audioSrc} /> : null}
@@ -472,7 +471,7 @@ export const AsmaVideo: React.FC<
           left: 0,
           height: Math.round(height * 0.008),
           width: `${progress * 100}%`,
-          background: WHITE,
+          background: INK,
         }}
       />
 
